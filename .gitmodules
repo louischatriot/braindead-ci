@@ -1,0 +1,3 @@
+[submodule "workspace/test"]
+	path = workspace/test
+	url = git@github.com:louischatriot/test.git
