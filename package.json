@@ -1,0 +1,32 @@
+{
+  "name": "braindead-ci"
+, "version": "0.0.1"
+, "author": { "name": "Louis Chatriot", "email": "louis.chatriot@gmail.com"}
+, "contributors": [
+    "Louis Chatriot"
+  ]
+, "description": "Dead simple continuous integration and deployment server"
+, "keywords": [
+    "continuous integration"
+  , "continuous deployment"
+  , "node"
+  , "deployment"
+  , "simple"
+  ]
+, "homepage": "https://github.com/louischatriot/braindead-ci"
+, "repository": { "type": "git"
+                , "url": "git@github.com:louischatriot/braindead-ci.git"
+                }
+, "dependencies": {
+    "h4e": "0.3.0"
+  , "express": "3.0.6"
+  }
+, "devDependencies": {
+    "chai": "1.0.x"
+  , "mocha": "1.4.x"
+  , "request": "2.9.x"
+  , "sinon": "1.3.x"
+  }
+, "main": "server"
+, "licence": "MIT"
+}
