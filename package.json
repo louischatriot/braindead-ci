@@ -20,6 +20,7 @@
 , "dependencies": {
     "h4e": "0.3.0"
   , "express": "3.0.6"
+  , "async": "0.1.x"
   }
 , "devDependencies": {
     "chai": "1.0.x"
