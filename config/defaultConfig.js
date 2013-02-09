@@ -4,4 +4,6 @@
 , templatesDir: 'templates'
 , trustProxy: true
 
+, workspace: 'workspace'
+
 }

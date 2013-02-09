@@ -6,6 +6,7 @@ var express = require('express')
   , http = require('http')
   , config = require('./lib/config')
   , app
+  , Job = require('./lib/job')
   //, routes = require('./routes/routes')
   //, middlewares = require('./lib/middlewares')
   , h4e = require('h4e');
