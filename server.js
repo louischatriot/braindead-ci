@@ -32,13 +32,12 @@ h4e.setup({ app: app
 
 app.use(express.bodyParser());
 //app.use(middlewares.commonRenderValues);
-app.use(app.router); // Map routes
+app.use(app.router);
 
 
 // Serving static files from paths that can't be confused with the webpages
 app.get('/assets/css/:file', express.static(__dirname));
 app.get('/assets/jquery/:file', express.static(__dirname));
-app.get('/assets/ace/:file', express.static(__dirname));
 app.get('/assets/bootstrap/:dir/:file', express.static(__dirname));
 app.get('/favicon.ico', function (req, res, next) { return res.send(404); });   // No favicon
 

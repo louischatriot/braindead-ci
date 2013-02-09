@@ -1,7 +1,7 @@
 {
-  a: 2
-, tre: 'salut'
-, svPort: 4567
+  svPort: 4567
 
+, templatesDir: 'templates'
+, trustProxy: true
 
 }

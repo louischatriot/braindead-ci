@@ -1,0 +1,20 @@
+body {
+  padding-top: 25px;
+}
+
+.title {
+  position: relative;
+  left: 15px;
+  font-weight:300;
+  margin-bottom: -10px;
+}
+
+.editor {
+  position: relative;
+  height: 400px;
+}
+
+.after-editor {
+  margin-top: 410px;
+}
+
