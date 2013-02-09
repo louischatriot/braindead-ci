@@ -17,12 +17,12 @@ if (config.trustProxy) {
   app.enable('trust proxy');
 }
 
-// Set up templating
-//h4e.setup({ app: app
-          //, baseDir: config.templatesDir
-          //, toCompileDirs: ['.']
-          //, extension: 'mustache'
-          //});
+ //Set up templating
+h4e.setup({ app: app
+          , baseDir: config.templatesDir
+          , toCompileDirs: ['.']
+          , extension: 'mustache'
+          });
 
 
 /**
