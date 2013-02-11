@@ -1,5 +1,5 @@
 {
-  svPort: 4567
+  svPort: 2008
 
 , templatesDir: 'templates'
 , trustProxy: true

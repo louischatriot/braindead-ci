@@ -7,7 +7,7 @@ var express = require('express')
   , config = require('./lib/config')
   , app
   , Job = require('./lib/job')
-  //, routes = require('./routes/routes')
+  , routes = require('./lib/routes')
   //, middlewares = require('./lib/middlewares')
   , h4e = require('h4e');
 
@@ -43,15 +43,7 @@ app.get('/assets/bootstrap/:dir/:file', express.static(__dirname));
 app.get('/favicon.ico', function (req, res, next) { return res.send(404); });   // No favicon
 
 // Serve the webpages
-//app.get('/', routes.index);
-//app.get('/:collection', routes.collection);
-//app.get('/:collection/new', routes.collectionCreate);
-//app.get('/:collection/delete', routes.collectionDelete);
-
-//app.get('/:collection/newDocument', routes.docCreate);
-//app.get('/:collection/:id/edit', routes.docEdit);
-//app.get('/:collection/:id/delete', routes.docDelete);
-//app.post('/:collection/:id', routes.docChange);
+app.get('/', routes.index);
 
 
 
