@@ -47,6 +47,7 @@ app.get('/', middlewares.commonRenderValues, routes.index);
 app.get('/jobs/new', middlewares.commonRenderValues, routes.createJob.displayForm);
 app.post('/jobs/new', middlewares.commonRenderValues, routes.createJob.create, routes.createJob.displayForm);
 app.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomepage);
+app.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.buildRecap);
 
 
 
