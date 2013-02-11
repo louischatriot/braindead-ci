@@ -1,3 +1,51 @@
 New build
 
+<script src="/assets/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+var prevDataLength;
+var nextLine = 0;
+var pollTimer;
+
+$(function(){
+  var x = new $.ajaxSettings.xhr();
+  x.open("GET", "/test");
+  handleResponseCallback = function(){
+    handleResponse(x);
+  };
+  x.onreadystatechange = handleResponseCallback;
+  pollTimer = setInterval(handleResponseCallback, 100);
+  x.send(null);
+});
+
+function handleResponse(http) {
+    if (http.readyState != 4 && http.readyState != 3)
+        return;
+    if (http.readyState == 3 && http.status != 200)
+        return;
+    if (http.readyState == 4 && http.status != 200) {
+        clearInterval(pollTimer);
+    }
+
+    while (prevDataLength != http.responseText.length) {
+        if (http.readyState == 4  && prevDataLength == http.responseText.length)
+            break;
+        prevDataLength = http.responseText.length;
+        var response = http.responseText.substring(nextLine);
+        var lines = response.split('\n');
+        nextLine = nextLine + response.lastIndexOf('\n') + 1;
+        if (response[response.length-1] != '\n')
+            lines.pop();
+        for (var i = 0; i < lines.length; i++) {
+          $("body").append($("<p></p>").html(lines[i]));
+        }
+    }
+
+    if (http.readyState == 4 && prevDataLength == http.responseText.length)
+      clearInterval(pollTimer);
+}
+
+
+console.log("dssfd");
+</script>
 

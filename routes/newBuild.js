@@ -13,8 +13,6 @@ module.exports.webpage = function (req, res, next) {
     ;
 
   Job.getJob(req.params.name, function (err, job) {
-    
-  
     return res.render('layout', { values: values
                                 , partials: partials
                                 });
@@ -23,6 +21,10 @@ module.exports.webpage = function (req, res, next) {
 
 
 module.exports.launchBuild = function (req, res, next) {
-
-
+  Job.getJob('mongo-edit', function (err, job) {
+    job.build(res, function () {
+      res.write("========= DONE ===");
+      res.end();
+    });
+  });
 };

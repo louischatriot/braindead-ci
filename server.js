@@ -39,6 +39,7 @@ app.use(app.router);
 // Serving static files from paths that can't be confused with the webpages
 app.get('/assets/css/:file', express.static(__dirname));
 app.get('/assets/jquery/:file', express.static(__dirname));
+app.get('/assets/socket.io/:file', express.static(__dirname));
 app.get('/assets/bootstrap/:dir/:file', express.static(__dirname));
 app.get('/favicon.ico', function (req, res, next) { return res.send(404); });   // No favicon
 
@@ -50,6 +51,9 @@ app.post('/jobs/new', middlewares.commonRenderValues, routes.createJob.create, r
 app.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomepage);
 
 app.get('/jobs/:name/builds/new', middlewares.commonRenderValues, routes.newBuild.webpage);
+
+app.get('/test', routes.newBuild.launchBuild);
+
 app.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.buildRecap);
 
 
