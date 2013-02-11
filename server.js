@@ -46,7 +46,10 @@ app.get('/favicon.ico', function (req, res, next) { return res.send(404); });   
 app.get('/', middlewares.commonRenderValues, routes.index);
 app.get('/jobs/new', middlewares.commonRenderValues, routes.createJob.displayForm);
 app.post('/jobs/new', middlewares.commonRenderValues, routes.createJob.create, routes.createJob.displayForm);
+
 app.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomepage);
+
+app.get('/jobs/:name/builds/new', middlewares.commonRenderValues, routes.newBuild.webpage);
 app.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.buildRecap);
 
 

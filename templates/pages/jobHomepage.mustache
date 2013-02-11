@@ -3,8 +3,9 @@
 
 Repo: {{job.repo}}<br>
 Branch: {{job.branch}}<br>
-Number of builds: {{job.numberOfBuilds}}<br>
-<br>
+Number of builds: {{job.numberOfBuilds}}<br><br>
+
+<a href="/jobs/{{job.name}}/builds/new" class="btn">Launch a new build</a><br><br>
 
 {{#job.previousBuilds}}
 <a href="/jobs/{{job.name}}/builds/{{number}}">Build #{{number}}</a><br>
