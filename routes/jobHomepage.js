@@ -15,12 +15,12 @@ module.exports = function (req, res, next) {
     ;
 
   Job.getJob(req.params.name, function (err, job) {
-    values.name = job.repo;
+    values.job = job;
+    values.job.numberOfBuilds = job.nextBuildNumber - 1;
 
-
-  return res.render('layout', { values: values
-                              , partials: partials
-                              });
+    return res.render('layout', { values: values
+                                , partials: partials
+                                });
   });
 }
 
