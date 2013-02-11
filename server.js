@@ -8,7 +8,7 @@ var express = require('express')
   , app
   , Job = require('./lib/job')
   , routes = require('./lib/routes')
-  //, middlewares = require('./lib/middlewares')
+  , middlewares = require('./lib/middlewares')
   , h4e = require('h4e');
 
 
@@ -43,9 +43,10 @@ app.get('/assets/bootstrap/:dir/:file', express.static(__dirname));
 app.get('/favicon.ico', function (req, res, next) { return res.send(404); });   // No favicon
 
 // Serve the webpages
-app.get('/', routes.index);
-app.get('/jobs/new', routes.createJob.displayForm);
-app.post('/jobs/new', routes.createJob.create, routes.createJob.displayForm);
+app.get('/', middlewares.commonRenderValues, routes.index);
+app.get('/jobs/new', middlewares.commonRenderValues, routes.createJob.displayForm);
+app.post('/jobs/new', middlewares.commonRenderValues, routes.createJob.create, routes.createJob.displayForm);
+app.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomepage);
 
 
 

@@ -1,13 +1,22 @@
 <h2 class="title">Create a new job</h2>
 <br><br>
 
+{{#validationErrors}}
+<div class="alert alert-error">
+  <ul>
+    {{#errors}}
+      <li>{{.}}</li>
+    {{/errors}}
+  </ul>
+</div>
+{{/validationErrors}}
 
 <form class="form-horizontal" method="post" action="/jobs/new">
   <!-- Name -->
   <div class="control-group">
     <label class="control-label" for="name">Job name</label>
     <div class="controls">
-      <input type="text" class="input-xlarge" id="name" placeholder="e.g. Our cool website" name="name">
+      <input type="text" class="input-xlarge" id="name" placeholder="e.g. Our cool website" name="name" value="{{userInput.name}}">
     </div>
   </div>
 
@@ -15,7 +24,7 @@
   <div class="control-group">
     <label class="control-label" for="repo">Git repo</label>
     <div class="controls">
-      <input type="text" class="input-xlarge" id="repo" placeholder="e.g. git@github.com:us/repo.git" name="repo">
+      <input type="text" class="input-xlarge" id="repo" placeholder="e.g. git@github.com:us/repo.git" name="repo" value="{{userInput.repo}}">
     </div>
   </div>
 
@@ -23,7 +32,7 @@
   <div class="control-group">
     <label class="control-label" for="branch">Branch to build</label>
     <div class="controls">
-      <input type="text" class="input-xlarge" id="branch" placeholder="e.g. master" name="branch">
+      <input type="text" class="input-xlarge" id="branch" placeholder="e.g. master" name="branch" value="{{userInput.branch}}">
     </div>
   </div>
 

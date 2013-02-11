@@ -23,13 +23,20 @@ function create(req, res, next) {
     , errors = []
     ;
 
-    console.log(req.body);
+  errors = customUtils.validate('job', req.body);
+  if (errors) {
+    customUtils.saveErrorsForDisplay(req, errors, req.body);
+    return displayForm(req, res, next);
+  }
 
-    console.log("====");
-    console.log(customUtils.validate('job', req.body));
+  Job.createJob(req.body, function (err) {
+    if (err) {
+      customUtils.saveErrorsForDisplay(req, ['Something strange happened, please try again'], req.body);
+      return displayForm(req, res, next);
+    }
 
-    res.redirect(302, '/jobs/new');
-
+    res.redirect(302, '/jobs/' + req.body.name);
+  });
 }
 
 // Interface
