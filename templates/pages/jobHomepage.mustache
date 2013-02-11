@@ -6,4 +6,6 @@ Branch: {{job.branch}}<br>
 Number of builds: {{job.numberOfBuilds}}<br>
 <br>
 
-
+{{#job.previousBuilds}}
+{{.}}<br>
+{{/job.previousBuilds}}

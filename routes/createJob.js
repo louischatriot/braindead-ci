@@ -5,7 +5,7 @@
 
 var config = require('../lib/config')
   , Job = require('../lib/job')
-  , customUtils = require('../lib/customUtils')
+  , validation = require('../lib/validation')
   ;
 
 function displayForm (req, res, next) {
@@ -23,15 +23,15 @@ function create(req, res, next) {
     , errors = []
     ;
 
-  errors = customUtils.validate('job', req.body);
+  errors = validation.validate('job', req.body);
   if (errors) {
-    customUtils.saveErrorsForDisplay(req, errors, req.body);
+    validation.saveErrorsForDisplay(req, errors, req.body);
     return displayForm(req, res, next);
   }
 
   Job.createJob(req.body, function (err) {
     if (err) {
-      customUtils.saveErrorsForDisplay(req, ['Something strange happened, please try again'], req.body);
+      validation.saveErrorsForDisplay(req, ['Something strange happened, please try again'], req.body);
       return displayForm(req, res, next);
     }
 
