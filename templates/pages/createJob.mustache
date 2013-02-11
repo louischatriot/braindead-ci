@@ -1,0 +1,36 @@
+<h2 class="title">Create a new job</h2>
+<br><br>
+
+
+<form class="form-horizontal" method="post" action="/jobs/new">
+  <!-- Name -->
+  <div class="control-group">
+    <label class="control-label" for="name">Job name</label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" id="name" placeholder="e.g. Our cool website" name="name">
+    </div>
+  </div>
+
+  <!-- Repo URL -->
+  <div class="control-group">
+    <label class="control-label" for="repo">Git repo</label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" id="repo" placeholder="e.g. git@github.com:us/repo.git" name="repo">
+    </div>
+  </div>
+
+  <!-- Branch -->
+  <div class="control-group">
+    <label class="control-label" for="branch">Branch to build</label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" id="branch" placeholder="e.g. master" name="branch">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+  </div>
+</form>
+

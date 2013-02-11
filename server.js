@@ -44,6 +44,8 @@ app.get('/favicon.ico', function (req, res, next) { return res.send(404); });   
 
 // Serve the webpages
 app.get('/', routes.index);
+app.get('/jobs/new', routes.createJob.displayForm);
+app.post('/jobs/new', routes.createJob.create, routes.createJob.displayForm);
 
 
 
