@@ -21,9 +21,9 @@
         <div class="span3">
           <h1 class="top-left-title"><a href="/">Braindead CI</a></h1>
           <ul class="nav nav-tabs nav-stacked" id="sidenav">
-            {{#jobs}}
-            <li><a href="/{{.}}">{{.}}</a></li>
-            {{/jobs}}
+            {{#jobsNames}}
+            <li><a href="/jobs/{{.}}">{{.}}</a></li>
+            {{/jobsNames}}
           </ul>
         </div>
 

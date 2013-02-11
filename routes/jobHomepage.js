@@ -17,6 +17,7 @@ module.exports = function (req, res, next) {
   Job.getJob(req.params.name, function (err, job) {
     values.job = job;
     values.job.numberOfBuilds = job.nextBuildNumber - 1;
+    values.job.previousBuilds = customUtils.objectToArrayInOrder(job.previousBuilds);
 
     return res.render('layout', { values: values
                                 , partials: partials

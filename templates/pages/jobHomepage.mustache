@@ -7,5 +7,5 @@ Number of builds: {{job.numberOfBuilds}}<br>
 <br>
 
 {{#job.previousBuilds}}
-{{.}}<br>
+<a href="/jobs/{{job.name}}/builds/{{number}}">Build #{{number}}</a><br>
 {{/job.previousBuilds}}
