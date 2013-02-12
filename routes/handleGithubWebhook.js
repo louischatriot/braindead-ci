@@ -12,7 +12,7 @@ module.exports = function (req, res, next) {
   var jobs = Object.keys(app.jobsMetadata)
     , payload = JSON.parse(req.body.payload)
     , receivedGithubRepoUrl = payload.repository.url
-    , receivedBranch = payload;
+    , receivedBranch = payload
     , jobToBuild;
 
     console.log("====================");
