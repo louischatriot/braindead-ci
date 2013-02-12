@@ -60,6 +60,13 @@ function init (callback) {
   });
 }
 
+/**
+ * Returns the jobs metadata (figures ...)
+ */
+function getJobsMetadata () {
+  return jobsMetadata;
+}
+
 
 module.exports.init = init;
-module.exports.jobsMetadata = jobsMetadata;
+module.exports.getJobsMetadata = getJobsMetadata;

@@ -9,17 +9,15 @@ var app = require('../app')
 
 
 module.exports = function (req, res, next) {
-  var jobs = Object.keys(app.jobsMetadata)
+  var jobsMetadata = app.getJobsMetadata()
+    , jobs = Object.keys(jobsMetadata)
     , payload = JSON.parse(req.body.payload)
     , receivedGithubRepoUrl = payload.repository.url
     , receivedBranch = payload
     , jobToBuild;
 
-    console.log("====================");
-    console.log(payload);
-
   jobs.forEach(function (name) {
-    if (app.jobsMetadata[name].githubRepoUrl === receivedGithubRepoUrl) {
+    if (jobsMetadata[name].githubRepoUrl === receivedGithubRepoUrl) {
       jobToBuild = name;
     }
   });
