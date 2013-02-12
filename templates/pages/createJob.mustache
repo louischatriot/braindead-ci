@@ -20,11 +20,20 @@
     </div>
   </div>
 
-  <!-- Repo URL -->
+  <!-- Github Repo URL -->
   <div class="control-group">
-    <label class="control-label" for="repo">Git repo</label>
+    <label class="control-label" for="githubRepoUrl">Repo Github url</label>
     <div class="controls">
-      <input type="text" class="input-xlarge" id="repo" placeholder="e.g. git@github.com:us/repo.git" name="repo" value="{{userInput.repo}}">
+      <input type="text" class="input-xlarge" id="githubRepoUrl" placeholder="e.g. https://github.com/organization/repo" name="githubRepoUrl" value="{{userInput.githubRepoUrl}}">
+    </div>
+  </div>
+
+
+  <!-- Repo SSH URL -->
+  <div class="control-group">
+    <label class="control-label" for="repoSSHUrl">Git repo SSH url</label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" id="repoSSHUrl" placeholder="e.g. git@github.com:organization/repo.git" name="repoSSHUrl" value="{{userInput.repoSSHUrl}}">
     </div>
   </div>
 

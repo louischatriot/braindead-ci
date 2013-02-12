@@ -28,7 +28,8 @@ function loadJobsmetadata (callback) {
         res[name] = {};
         Job.loadConfig(name, function (err, config) {
           if (err) { return cb(err); }
-          res[name].repo = config.repo;
+          res[name].githubRepoUrl = config.githubRepoUrl;
+          res[name].repoSSHUrl = config.repoSSHUrl;
           res[name].branch = config.branch;
           res[name].nextBuildNumber = config.nextBuildNumber;
           if (config.nextBuildNumber !== 0) {
