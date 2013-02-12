@@ -27,6 +27,7 @@ $(function(){
 });
 
 function handleResponse(http) {
+  var response, lines
     if (http.readyState != 4 && http.readyState != 3)
         return;
     if (http.readyState == 3 && http.status != 200)
@@ -35,26 +36,13 @@ function handleResponse(http) {
         clearInterval(pollTimer);
     }
 
-    while (prevDataLength != http.responseText.length) {
-        if (http.readyState == 4  && prevDataLength == http.responseText.length)
-            break;
         prevDataLength = http.responseText.length;
-        var response = http.responseText.substring(nextLine);
-        var lines = response.split('\n');
-        nextLine = nextLine + response.lastIndexOf('\n') + 1;
-        if (response[response.length-1] != '\n')
-            lines.pop();
-        for (var i = 0; i < lines.length; i++) {
-          $buildResult.append(lines[i] + '\n');
-          /*$("body").append($("<p></p>").html(lines[i]));*/
-        }
-    }
+        $buildResult.html(http.responseText);
+
+console.log("==== STILL USED ====");
 
     if (http.readyState == 4 && prevDataLength == http.responseText.length)
       clearInterval(pollTimer);
 }
-
-
-console.log("dssfd");
 </script>
 
