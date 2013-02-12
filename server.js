@@ -61,6 +61,8 @@ expressServer.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderVal
 expressServer.post('/githubwebhook', function (req, res, next) {
   console.log(req.body);
   console.log("====================");
+  console.log(Object.keys(req.body));
+  console.log("=================");
   console.log(JSON.parse(req.body.payload));
   res.send(200);
 });
