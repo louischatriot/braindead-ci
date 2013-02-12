@@ -23,8 +23,13 @@ module.exports.webpage = function (req, res, next) {
 module.exports.launchBuild = function (req, res, next) {
   res.writeHead(200);
   Job.getJob('mongo-edit', function (err, job) {
-    job.build(res, function () {
-      res.write("========= DONE ===");
+    job.build(res, function (err) {
+      res.write("========= DONE ===\n");
+      if (err) {
+        res.write("There was an error");
+      } else {
+        res.write("Yay, build completed without errors");
+      }
       res.end();
     });
   });
