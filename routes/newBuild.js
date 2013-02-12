@@ -21,6 +21,7 @@ module.exports.webpage = function (req, res, next) {
 
 
 module.exports.launchBuild = function (req, res, next) {
+  res.writeHead(200);
   Job.getJob('mongo-edit', function (err, job) {
     job.build(res, function () {
       res.write("========= DONE ===");

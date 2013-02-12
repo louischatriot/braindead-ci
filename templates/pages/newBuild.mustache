@@ -9,40 +9,17 @@
 <script src="/assets/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
-var prevDataLength
-  , nextLine = 0
-  , pollTimer
-  , $buildResult = $('#buildResult')
-  ;
+$(function () {
+  var xhr = new $.ajaxSettings.xhr()
+   , $buildResult = $('#buildResult');
 
-$(function(){
-  var x = new $.ajaxSettings.xhr();
-  x.open("GET", "/test");
-  handleResponseCallback = function(){
-    handleResponse(x);
-  };
-  x.onreadystatechange = handleResponseCallback;
-  pollTimer = setInterval(handleResponseCallback, 100);
-  x.send(null);
-});
-
-function handleResponse(http) {
-  var response, lines
-    if (http.readyState != 4 && http.readyState != 3)
-        return;
-    if (http.readyState == 3 && http.status != 200)
-        return;
-    if (http.readyState == 4 && http.status != 200) {
-        clearInterval(pollTimer);
+  xhr.open("GET", "/test");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 || xhr.readyState == 3) {
+      $buildResult.html(xhr.responseText);
     }
-
-        prevDataLength = http.responseText.length;
-        $buildResult.html(http.responseText);
-
-console.log("==== STILL USED ====");
-
-    if (http.readyState == 4 && prevDataLength == http.responseText.length)
-      clearInterval(pollTimer);
-}
+  };
+  xhr.send(null);
+});
 </script>
 
