@@ -1,11 +1,19 @@
-New build
+<h2 class="title">New build</h2>
+<br><br>
+
+<pre id="buildResult">
+
+</pre>
+
 
 <script src="/assets/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
-var prevDataLength;
-var nextLine = 0;
-var pollTimer;
+var prevDataLength
+  , nextLine = 0
+  , pollTimer
+  , $buildResult = $('#buildResult')
+  ;
 
 $(function(){
   var x = new $.ajaxSettings.xhr();
@@ -37,7 +45,8 @@ function handleResponse(http) {
         if (response[response.length-1] != '\n')
             lines.pop();
         for (var i = 0; i < lines.length; i++) {
-          $("body").append($("<p></p>").html(lines[i]));
+          $buildResult.append(lines[i] + '\n');
+          /*$("body").append($("<p></p>").html(lines[i]));*/
         }
     }
 
