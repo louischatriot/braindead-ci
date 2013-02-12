@@ -9,6 +9,7 @@ var express = require('express')
   , Job = require('./lib/job')
   , routes = require('./lib/routes')
   , middlewares = require('./lib/middlewares')
+  , customUtils = require('./lib/customUtils')
   , h4e = require('h4e');
 
 
@@ -71,15 +72,19 @@ app.launchServer = function (cb) {
     , self = this
     ;
 
-  self.apiServer = http.createServer(self);   // Let's not call it 'server' we never know if Express will want to use this variable!
+  customUtils.ensureFolderExists(config.workspace, function (err) {
+    if (err) { return callback("Couldn't ensure the workspace exists"); }
 
-  // Handle any connection error gracefully
-  self.apiServer.on('error', function () {
-    return callback("An error occured while launching the server, probably a server is already running on the same port!");
+    self.apiServer = http.createServer(self);   // Let's not call it 'server' we never know if Express will want to use this variable!
+
+    // Handle any connection error gracefully
+    self.apiServer.on('error', function () {
+      return callback("An error occured while launching the server, probably a server is already running on the same port!");
+    });
+
+    // Begin to listen. If the callback gets called, it means the server was successfully launched
+    self.apiServer.listen.apply(self.apiServer, [config.svPort, callback]);
   });
-
-  // Begin to listen. If the callback gets called, it means the server was successfully launched
-  self.apiServer.listen.apply(self.apiServer, [config.svPort, callback]);
 };
 
 
@@ -109,7 +114,7 @@ if (module.parent === null) {
       console.log(err);
       process.exit(1);
     } else {
-      console.log('Server started on port ' + config.svPort);
+      console.log('Workspace found. Server started on port ' + config.svPort);
     }
   });
 }
