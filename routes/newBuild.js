@@ -13,6 +13,8 @@ module.exports.webpage = function (req, res, next) {
     ;
 
   Job.getJob(req.params.name, function (err, job) {
+    values.job = job;
+
     return res.render('layout', { values: values
                                 , partials: partials
                                 });
@@ -22,7 +24,7 @@ module.exports.webpage = function (req, res, next) {
 
 module.exports.launchBuild = function (req, res, next) {
   res.writeHead(200);
-  Job.getJob('mongo-edit', function (err, job) {
+  Job.getJob(req.params.name, function (err, job) {
     job.build(res, function (err) {
       res.write("========= DONE ===\n");
       if (err) {
@@ -30,6 +32,7 @@ module.exports.launchBuild = function (req, res, next) {
       } else {
         res.write("Yay, build completed without errors");
       }
+
       res.end();
     });
   });

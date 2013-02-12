@@ -1,4 +1,4 @@
-<h2 class="title">New build</h2>
+<h2 class="title">{{job.name}} &gt;&gt; New build</h2>
 <br><br>
 
 <pre id="buildResult"></pre>
@@ -9,7 +9,7 @@ $(function () {
   var xhr = new $.ajaxSettings.xhr()
    , $buildResult = $('#buildResult');
 
-  xhr.open("GET", "/test");
+  xhr.open("GET", "/jobs/{{job.name}}/builds/launch");
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 || xhr.readyState == 3) {
       $buildResult.html(xhr.responseText);

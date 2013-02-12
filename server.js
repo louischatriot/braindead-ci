@@ -51,8 +51,7 @@ app.post('/jobs/new', middlewares.commonRenderValues, routes.createJob.create, r
 app.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomepage);
 
 app.get('/jobs/:name/builds/new', middlewares.commonRenderValues, routes.newBuild.webpage);
-
-app.get('/test', routes.newBuild.launchBuild);
+app.get('/jobs/:name/builds/launch', routes.newBuild.launchBuild);   // API route to actually launch the build. Called by the above route.
 
 app.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.buildRecap);
 
