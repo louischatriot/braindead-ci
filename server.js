@@ -45,16 +45,22 @@ app.get('/favicon.ico', function (req, res, next) { return res.send(404); });   
 
 // Serve the webpages
 app.get('/', middlewares.commonRenderValues, routes.index);
+
+// Create or show a job
 app.get('/jobs/new', middlewares.commonRenderValues, routes.createJob.displayForm);
 app.post('/jobs/new', middlewares.commonRenderValues, routes.createJob.create, routes.createJob.displayForm);
-
 app.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomepage);
 
+// Create or show a build
 app.get('/jobs/:name/builds/new', middlewares.commonRenderValues, routes.newBuild.webpage);
 app.get('/jobs/:name/builds/launch', routes.newBuild.launchBuild);   // API route to actually launch the build. Called by the above route.
-
 app.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.buildRecap);
 
+// Handle payload delivered by Github
+app.post('/githubwebhook', function (req, res, next) {
+  console.log(req.body);
+  res.send(200);
+});
 
 
 /*
