@@ -26,7 +26,9 @@ module.exports.launchBuild = function (req, res, next) {
   res.writeHead(200);
   Job.getJob(req.params.name, function (err, job) {
     job.build(res, function (err) {
-      res.write("========= DONE ===\n");
+      res.write("========================\n");
+      res.write("========= DONE =========\n");
+      res.write("========================\n");
       if (err) {
         res.write("There was an error");
       } else {
