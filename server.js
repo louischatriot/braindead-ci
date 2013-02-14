@@ -47,9 +47,10 @@ expressServer.get('/favicon.ico', function (req, res, next) { return res.send(40
 // Serve the webpages
 expressServer.get('/', middlewares.commonRenderValues, routes.index);
 
-// Create or show a job
+// Create, edit or show a job
 expressServer.get('/jobs/new', middlewares.commonRenderValues, routes.createJob.displayForm);
 expressServer.post('/jobs/new', middlewares.commonRenderValues, routes.createJob.create, routes.createJob.displayForm);
+expressServer.get('/jobs/:name/edit', middlewares.commonRenderValues, routes.createJob.populateFormForEdition, routes.createJob.displayForm);
 expressServer.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomepage);
 
 // Create or show a build

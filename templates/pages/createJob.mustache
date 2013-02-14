@@ -1,4 +1,4 @@
-<h2 class="title">Create a new job</h2>
+<h2 class="title">{{title}}</h2>
 <br><br>
 
 {{#validationErrors}}
@@ -45,17 +45,27 @@
     </div>
   </div>
 
+  <!-- Test Script -->
+  <div class="control-group">
+    <label class="control-label" for="testScript">Bash test script</label>
+    <div class="controls">
+      <textarea rows="6" class="input-xlarge" id="testScript" placeholder="e.g. sudo start server" name="testScript">{{userInput.testScript}}</textarea>
+    </div>
+  </div>
+
   <!-- Deploy Script -->
   <div class="control-group">
-    <label class="control-label" for="deployScript">Deploy script</label>
+    <label class="control-label" for="deployScript">Bash deploy script</label>
     <div class="controls">
       <textarea rows="6" class="input-xlarge" id="deployScript" placeholder="e.g. sudo start server" name="deployScript">{{userInput.deployScript}}</textarea>
     </div>
   </div>
 
+  <input type="hidden" name="editMode" value="{{#editMode}}true{{/editMode}}">
+
   <div class="control-group">
     <div class="controls">
-      <button type="submit" class="btn btn-primary">Create</button>
+      <button type="submit" class="btn btn-primary">Save</button>
     </div>
   </div>
 </form>
