@@ -29,11 +29,6 @@ module.exports.launchBuild = function (req, res, next) {
       res.write("========================\n");
       res.write("========= DONE =========\n");
       res.write("========================\n");
-      if (err) {
-        res.write("There was an error");
-      } else {
-        res.write("Yay, build completed without errors");
-      }
 
       res.end();
     });
