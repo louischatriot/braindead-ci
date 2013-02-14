@@ -16,6 +16,11 @@ module.exports = function (req, res, next) {
     , receivedBranch = payload
     , jobToBuild;
 
+    console.log("========================");
+    console.log("========================");
+    console.log("========================");
+    console.log(payload);
+
   jobs.forEach(function (name) {
     if (jobsMetadata[name].githubRepoUrl === receivedGithubRepoUrl) {
       jobToBuild = name;
