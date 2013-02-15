@@ -16,12 +16,10 @@ module.exports = function (req, res, next) {
     , receivedBranch = payload.ref.replace(/^.*\//,'')
     , jobToBuild;
 
-
-
-    console.log("========================");
-    console.log("========================");
-    console.log("========================");
-    console.log(receivedBranch);
+  console.log("========================");
+  console.log("========================");
+  console.log("========================");
+  console.log(receivedBranch);
 
   jobs.forEach(function (name) {
     if (jobsMetadata[name].githubRepoUrl === receivedGithubRepoUrl && jobsMetadata[name].branch === receivedBranch) {
@@ -33,8 +31,9 @@ module.exports = function (req, res, next) {
     Job.getJob(jobToBuild, function (err, job) {
       if (err) { return res.send(200); }
       job.build(null, function (err) {
-        res.send(200);
       });
     });
   }
+
+  return res.send(200);   // Always return a success
 };
