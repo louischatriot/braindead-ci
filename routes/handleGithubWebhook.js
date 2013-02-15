@@ -13,13 +13,16 @@ module.exports = function (req, res, next) {
     , jobs = Object.keys(jobsMetadata)
     , payload = JSON.parse(req.body.payload)
     , receivedGithubRepoUrl = payload.repository.url
-    , receivedBranch = payload.head_commit.ref.replace(/^.*\//,'')
+    , receivedBranch = null
+    //, receivedBranch = payload.head_commit.ref.replace(/^.*\//,'')
     , jobToBuild;
+
+
 
     console.log("========================");
     console.log("========================");
     console.log("========================");
-    console.log(payload);
+    console.log(payload.head_commit);
 
   jobs.forEach(function (name) {
     if (jobsMetadata[name].githubRepoUrl === receivedGithubRepoUrl && jobsMetadata[name].branch === receivedBranch) {
