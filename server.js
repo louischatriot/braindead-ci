@@ -59,7 +59,7 @@ expressServer.get('/jobs/:name/builds/launch', routes.newBuild.launchBuild);   /
 expressServer.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.buildRecap);
 
 // Handle payload delivered by Github
-expressServer.post('/githubwebhook', routes.handleGithubWebhook);
+expressServer.post('/public/githubwebhook', routes.handleGithubWebhook);
 
 
 /*
