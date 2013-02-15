@@ -13,7 +13,7 @@ module.exports = function (req, res, next) {
     , jobs = Object.keys(jobsMetadata)
     , payload = JSON.parse(req.body.payload)
     , receivedGithubRepoUrl = payload.repository.url
-    , receivedBranch = payload.head_commit.ref.replace(/.*\//,'');
+    , receivedBranch = payload.head_commit.ref.replace(/^.*\//,'')
     , jobToBuild;
 
     console.log("========================");
