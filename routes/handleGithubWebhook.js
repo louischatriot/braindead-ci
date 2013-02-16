@@ -5,7 +5,7 @@
 
 var app = require('../app')
   , Job = require('../lib/job')
-  , executor = require('../lib/')
+  , executor = require('../lib/executor')
   ;
 
 
