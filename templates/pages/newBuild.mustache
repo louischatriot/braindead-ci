@@ -5,18 +5,18 @@
 
 
 <script>
-$(function () {
-  var xhr = new $.ajaxSettings.xhr()
-   , $buildResult = $('#buildResult')
-   , $body = $('body');
+/*$(function () {*/
+  /*var xhr = new $.ajaxSettings.xhr()*/
+   /*, $buildResult = $('#buildResult')*/
+   /*, $body = $('body');*/
 
-  xhr.open("GET", "/jobs/{{job.name}}/builds/launch");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 || xhr.readyState == 3) {
-      $buildResult.html(xhr.responseText);
-      $body.scrollTop($(document).height());
-    }
-  };
-  xhr.send(null);
-});
+  /*xhr.open("GET", "/jobs/{{job.name}}/builds/launch");*/
+  /*xhr.onreadystatechange = function () {*/
+    /*if (xhr.readyState == 4 || xhr.readyState == 3) {*/
+      /*$buildResult.html(xhr.responseText);*/
+      /*$body.scrollTop($(document).height());*/
+    /*}*/
+  /*};*/
+  /*xhr.send(null);*/
+/*});*/
 </script>

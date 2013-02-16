@@ -5,6 +5,7 @@
 
 var config = require('../lib/config')
   , Job = require('../lib/job')
+  , executor = require('../lib/executor')
   ;
 
 module.exports.webpage = function (req, res, next) {
@@ -14,6 +15,7 @@ module.exports.webpage = function (req, res, next) {
 
   Job.getJob(req.params.name, function (err, job) {
     values.job = job;
+    executor.registerBuild(job.name);
 
     return res.render('layout', { values: values
                                 , partials: partials
@@ -23,14 +25,5 @@ module.exports.webpage = function (req, res, next) {
 
 
 module.exports.launchBuild = function (req, res, next) {
-  res.writeHead(200);
-  Job.getJob(req.params.name, function (err, job) {
-    job.build(res, function (err) {
-      res.write("========================\n");
-      res.write("========= DONE =========\n");
-      res.write("========================\n");
 
-      res.end();
-    });
-  });
 };

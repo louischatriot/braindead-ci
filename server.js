@@ -11,7 +11,9 @@ var express = require('express')
   , routes = require('./lib/routes')
   , middlewares = require('./lib/middlewares')
   , customUtils = require('./lib/customUtils')
-  , h4e = require('h4e');
+  , h4e = require('h4e')
+  , executor = require('./lib/executor')
+  ;
 
 
 expressServer = express();
@@ -60,6 +62,12 @@ expressServer.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderVal
 
 // Handle payload delivered by Github
 expressServer.post('/public/githubwebhook', routes.handleGithubWebhook);
+
+
+// Test
+expressServer.get('/current', function (req, res, next) {
+  res.json(200, executor.getCurrentJob());
+});
 
 
 /*
