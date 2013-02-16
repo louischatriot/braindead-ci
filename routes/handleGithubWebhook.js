@@ -5,6 +5,7 @@
 
 var app = require('../app')
   , Job = require('../lib/job')
+  , executor = require('../lib/')
   ;
 
 
@@ -28,11 +29,7 @@ module.exports = function (req, res, next) {
   });
 
   if (jobToBuild) {
-    Job.getJob(jobToBuild, function (err, job) {
-      if (err) { return res.send(200); }
-      job.build(null, function (err) {
-      });
-    });
+    executor.registerBuild(jobToBuild);
   }
 
   return res.send(200);   // Always return a success
