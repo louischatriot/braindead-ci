@@ -23,7 +23,11 @@ $(function () {
        }
      })
      .fail(function (jqXHR) {
-       window.location = '/jobs/{{job.name}}';
+console.log("===============");
+console.log("===============");
+console.log("===============");
+setTimeout(checkBuildStatus, 2000);
+       /*window.location = '/jobs/{{job.name}}';*/
      });
   }
 
