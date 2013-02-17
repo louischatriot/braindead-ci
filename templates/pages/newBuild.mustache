@@ -5,18 +5,28 @@
 
 
 <script>
-/*$(function () {*/
-  /*var xhr = new $.ajaxSettings.xhr()*/
-   /*, $buildResult = $('#buildResult')*/
-   /*, $body = $('body');*/
+$(function () {
+  var buildResultUrl = "/jobs/{{job.name}}/builds/current"
+    , $buildResult = $('#buildResult')
+    , buildStarted = false
+    ;
 
-  /*xhr.open("GET", "/jobs/{{job.name}}/builds/launch");*/
-  /*xhr.onreadystatechange = function () {*/
-    /*if (xhr.readyState == 4 || xhr.readyState == 3) {*/
-      /*$buildResult.html(xhr.responseText);*/
-      /*$body.scrollTop($(document).height());*/
-    /*}*/
-  /*};*/
-  /*xhr.send(null);*/
-/*});*/
+  function checkBuildStatus () {
+    $.ajax({ url: buildResultUrl })
+     .done(function (data, textStatus, jqXHR) {
+       if (jqXHR.status === 201) {
+         $buildResult.html(data.message);
+         setTimeout(checkBuildStatus, 2000);
+       } else {
+         $buildResult.html(data.log);
+         setTimeout(checkBuildStatus, 500);
+       }
+     })
+     .fail(function (jqXHR) {
+       window.location = '/jobs/{{job.name}}';
+     });
+  }
+
+  checkBuildStatus();
+});
 </script>

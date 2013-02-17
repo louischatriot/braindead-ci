@@ -57,7 +57,7 @@ expressServer.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomep
 
 // Create or show a build
 expressServer.get('/jobs/:name/builds/new', middlewares.commonRenderValues, routes.newBuild.webpage);
-expressServer.get('/jobs/:name/builds/launch', routes.newBuild.launchBuild);   // API route to actually launch the build. Called by the above route.
+expressServer.get('/jobs/:name/builds/current', routes.newBuild.currentBuild);
 expressServer.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.buildRecap);
 
 // Handle payload delivered by Github

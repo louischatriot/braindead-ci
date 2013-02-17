@@ -24,6 +24,15 @@ module.exports.webpage = function (req, res, next) {
 };
 
 
-module.exports.launchBuild = function (req, res, next) {
-
+module.exports.currentBuild = function (req, res, next) {
+  if (executor.isABuildQueued(req.params.name)) {
+    var currentJob = executor.getCurrentJob();
+    if (req.params.name === currentJob.name) {
+      return res.json(200, currentJob);
+    } else {
+      return res.json(201, { message: 'Build scheduled' });
+    }
+  } else {
+    return res.json(404, { message: 'This job has no build queued' });
+  }
 };
