@@ -64,4 +64,3 @@ function buildRecap (req, res, next) {
 module.exports.buildRecap = buildRecap;
 module.exports.currentBuild = currentBuild;
 module.exports.newBuildWebpage = newBuildWebpage;
-
