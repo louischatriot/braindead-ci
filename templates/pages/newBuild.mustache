@@ -6,7 +6,7 @@
 
 <script>
 $(function () {
-  var buildResultUrl = "/jobs/{{job.name}}/builds/current"
+  var buildResultUrl = "/jobs/{{job.name}}/builds/{{job.nextBuildNumber}}"
     , $buildResult = $('#buildResult')
     , buildStarted = false
     ;
@@ -23,10 +23,13 @@ $(function () {
        }
      })
      .fail(function (jqXHR) {
-console.log("===============");
-console.log("===============");
-console.log("===============");
-setTimeout(checkBuildStatus, 2000);
+       console.log("=== Failed");
+       if (buildStarted) {
+         console.log("=== Build finished executing");
+       } else {
+         console.log("=== No fucking build scheduled");
+       }
+       /*setTimeout(checkBuildStatus, 2000);*/
        /*window.location = '/jobs/{{job.name}}';*/
      });
   }

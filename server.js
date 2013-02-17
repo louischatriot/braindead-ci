@@ -56,9 +56,9 @@ expressServer.get('/jobs/:name/edit', middlewares.commonRenderValues, routes.cre
 expressServer.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomepage);
 
 // Create or show a build
-expressServer.get('/jobs/:name/builds/new', middlewares.commonRenderValues, routes.newBuild.webpage);
+expressServer.get('/jobs/:name/builds/new', middlewares.commonRenderValues, routes.newBuild.newBuildWebpage);
 expressServer.get('/jobs/:name/builds/current', routes.newBuild.currentBuild);
-expressServer.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.buildRecap);
+expressServer.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.newBuild.buildRecap);
 
 // Handle payload delivered by Github
 expressServer.post('/public/githubwebhook', routes.handleGithubWebhook);

@@ -5,7 +5,6 @@
 
 var config = require('../lib/config')
   , Job = require('../lib/job')
-  , customUtils = require('../lib/customUtils')
   ;
 
 module.exports = function (req, res, next) {
