@@ -24,19 +24,24 @@ function newBuildWebpage (req, res, next) {
 };
 
 
-function currentBuild (req, res, next) {
-  var currentJob = executor.getCurrentJob();
+function buildLog (req, res, next) {
+  Job.getJob(req.params.name, function (err, job) {
+    job.getBuild(req.params.buildNumber, function (err, buildData) {
+      if (!err) { return res.json(200, { log: buildData.log }); }
+      var currentJob = executor.getCurrentJob();
 
-  if (req.params.name === currentJob.name) {
-    return res.json(200, currentJob);
-  } else {
-    if (executor.isABuildQueued(req.params.name)) {
-      return res.json(201, { message: 'Build scheduled' });
-    } else {
-      return res.json(404, { message: 'This job has no build queued' });
-    }
-  }
-};
+      if (req.params.name === currentJob.name && parseInt(req.params.buildNumber, 10) === currentJob.buildNumber) {
+        return res.json(206, { log: currentJob.log });
+      }
+
+      if (executor.isABuildQueued(req.params.name)) {   // We're lying a bit here but this case shouldn't happen
+        return res.json(201, { message: 'Build scheduled' });
+      } else {
+        return res.json(404, { message: 'This job has no build for this number, and no queued' });
+      }
+    });
+  });
+}
 
 
 function buildRecap (req, res, next) {
@@ -62,5 +67,5 @@ function buildRecap (req, res, next) {
 
 
 module.exports.buildRecap = buildRecap;
-module.exports.currentBuild = currentBuild;
 module.exports.newBuildWebpage = newBuildWebpage;
+module.exports.buildLog = buildLog;

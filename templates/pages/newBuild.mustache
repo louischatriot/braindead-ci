@@ -6,33 +6,30 @@
 
 <script>
 $(function () {
-  var buildResultUrl = "/jobs/{{job.name}}/builds/{{job.nextBuildNumber}}"
+  var buildResultUrl = "/jobs/{{job.name}}/builds/{{job.nextBuildNumber}}/log"
     , $buildResult = $('#buildResult')
-    , buildStarted = false
     ;
 
   function checkBuildStatus () {
     $.ajax({ url: buildResultUrl })
      .done(function (data, textStatus, jqXHR) {
-        console.log("-------------");
+       if (jqXHR.status === 200) {
+         $buildResult.html(data.log);
+         return;   // Done
+       }
 
-       if (jqXHR.status === 201) {
-         $buildResult.html(data.message);
-         setTimeout(checkBuildStatus, 2000);
-       } else {
+       if (jqXHR.status === 206) {
          $buildResult.html(data.log);
          setTimeout(checkBuildStatus, 500);
        }
+
+       if (jqXHR.status === 201) {
+         $buildResult.html(data.message);
+         setTimeout(checkBuildStatus, 5000);
+       }
      })
      .fail(function (jqXHR) {
-       console.log("=== Failed");
-       if (buildStarted) {
-         console.log("=== Build finished executing");
-       } else {
-         console.log("=== No fucking build scheduled");
-       }
-       /*setTimeout(checkBuildStatus, 2000);*/
-       /*window.location = '/jobs/{{job.name}}';*/
+       $buildResult.html(data.message);
      });
   }
 
