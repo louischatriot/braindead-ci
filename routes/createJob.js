@@ -5,6 +5,7 @@
 
 var config = require('../lib/config')
   , Job = require('../lib/job')
+  , app = require('../app')
   , validation = require('../lib/validation')
   ;
 
@@ -63,7 +64,9 @@ function create(req, res, next) {
         return displayForm(req, res, next);
       }
 
-      res.redirect(302, '/jobs/' + req.body.name);
+      app.addJobMetadata(req.body.name, function () {
+        res.redirect(302, '/jobs/' + req.body.name);
+      });
     });
   }
 }
