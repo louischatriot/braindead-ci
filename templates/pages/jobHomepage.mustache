@@ -12,7 +12,7 @@ Branch: {{job.branch}}
   Job is enabled. <button id='disable-job' class="btn btn-small">Disable it</button>
 {{/job.enabled}}
 {{^job.enabled}}
-  Job is disabled. <button id='enable-job' class="btn btn-small">Enable it</button>
+  <strong>Job is disabled.</strong> <button id='enable-job' class="btn btn-small btn-primary">Enable it</button>
 {{/job.enabled}}
 
 <hr style="margin-bottom: 5px; margin-top: 35px;">
@@ -26,9 +26,16 @@ Branch: {{job.branch}}
 
 
 <script>
-  var enabled = {{job.enabled}}
+  var enabled
     , $newBuildButton = $('#new-build')
     ;
+
+  // To work with legacy versions who dont have the enabled flag
+  try {
+    enabled = {{job.enabled}};
+  } catch(e) {
+    enabled = false;
+  }
 
   // Allow to build the job only if it is enabled
   if (!enabled) {
