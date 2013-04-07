@@ -1,20 +1,17 @@
 <h2 class="title">{{job.name}}</h2>
-<br>
 
-<hr>
+<hr style="margin-bottom: 5px;">
 <h4>Configuration <a href="/jobs/{{job.name}}/edit">(change)</a></h4>
-Repo: {{job.repoSSHUrl}}<br>
-Branch: {{job.branch}}<br>
-Number of builds: {{job.numberOfBuilds}}<br><br>
+Github repo url: <a href="{{job.githubRepoUrl}}" target="_blank">{{job.githubRepoUrl}}</a><br>
+SSH url: {{job.repoSSHUrl}}<br>
+Branch: {{job.branch}}
 
-<hr>
+<hr style="margin-bottom: 5px; margin-top: 35px;">
 <h4>Status</h4>
 Job is enabled
 
-<hr>
-<h4>Builds</h4>
-
-<a href="/jobs/{{job.name}}/builds/new" class="btn">Launch a new build</a><br><br>
+<hr style="margin-bottom: 5px; margin-top: 35px;">
+<h4>Builds ({{job.numberOfBuilds}})&nbsp;&nbsp;&nbsp;<a href="/jobs/{{job.name}}/builds/new" class="btn btn-small">New build</a></h4>
 
 {{#job.previousBuilds}}
 <a href="/jobs/{{job.name}}/builds/{{number}}" class="build-{{#success}}success{{/success}}{{^success}}fail{{/success}}">

@@ -16,6 +16,7 @@ body {
   margin-bottom: -10px;
 }
 
+
 /* Styling links to builds in job recap page */
 .build-success {
   color: #468847;

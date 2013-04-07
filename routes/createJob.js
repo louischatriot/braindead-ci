@@ -40,9 +40,9 @@ function create(req, res, next) {
     ;
 
   delete req.body.editMode;
-  errors = validation.validate('job', req.body);
+  errors = Job.validate(req.body);
   if (errors) {
-    validation.saveErrorsForDisplay(req, errors, req.body);
+    validation.prepareErrorsForDisplay(req, errors, req.body);
     return displayForm(req, res, next);
   }
 
@@ -50,7 +50,7 @@ function create(req, res, next) {
     Job.getJob(req.body.name, function (err, job) {   // Cant change the name yet oO
       job.edit(req.body, function () {
         if (err) {
-          validation.saveErrorsForDisplay(req, ['Something strange happened, please try again'], req.body);
+          validation.prepareErrorsForDisplay(req, ['Something strange happened, please try again'], req.body);
           return displayForm(req, res, next);
         }
 
@@ -60,7 +60,7 @@ function create(req, res, next) {
   } else {
     Job.createJob(req.body, function (err) {
       if (err) {
-        validation.saveErrorsForDisplay(req, ['Something strange happened, please try again'], req.body);
+        validation.prepareErrorsForDisplay(req, ['Something strange happened, please try again'], req.body);
         return displayForm(req, res, next);
       }
 
