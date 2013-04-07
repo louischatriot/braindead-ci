@@ -29,7 +29,9 @@ function loadJobMetadata (name, callback) {
  * Add job metadata to all the jobs metadata
  * Callback signature: err
  */
-function addJobMetadata (name, callback) {
+function addJobMetadata (name, cb) {
+  var callback = cb || function () {};
+
   loadJobMetadata(name, function (err, jobMetadata) {
     if (err) { return callback(err); }
     jobsMetadata[name] = jobMetadata;
