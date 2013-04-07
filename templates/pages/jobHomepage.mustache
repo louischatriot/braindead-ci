@@ -26,16 +26,9 @@ Branch: {{job.branch}}
 
 
 <script>
-  var enabled
+  var enabled = true
     , $newBuildButton = $('#new-build')
     ;
-
-  // To work with legacy versions who dont have the enabled flag
-  try {
-    enabled = {{job.enabled}};
-  } catch(e) {
-    enabled = false;
-  }
 
   // Allow to build the job only if it is enabled
   if (!enabled) {
