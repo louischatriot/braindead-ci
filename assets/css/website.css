@@ -16,3 +16,23 @@ body {
   margin-bottom: -10px;
 }
 
+/* Styling links to builds in job recap page */
+.build-success {
+  color: #468847;
+}
+.build-success:hover {
+  color: #468847;
+}
+
+.build-fail {
+  color: #b94a48;
+}
+.build-fail:hover {
+  color: #b94a48;
+}
+
+/* Styling build status in build status page */
+.build-headline-status {
+  padding-left: 14px;
+  padding-right: 14px;
+}

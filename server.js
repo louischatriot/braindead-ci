@@ -13,6 +13,7 @@ var express = require('express')
   , customUtils = require('./lib/customUtils')
   , h4e = require('h4e')
   , executor = require('./lib/executor')
+  , beforeEach = require('express-group-handlers').beforeEach
   ;
 
 
@@ -47,22 +48,24 @@ expressServer.get('/assets/bootstrap/:dir/:file', express.static(__dirname));
 expressServer.get('/favicon.ico', function (req, res, next) { return res.send(404); });   // No favicon
 
 // Serve the webpages
-expressServer.get('/', middlewares.commonRenderValues, routes.index);
+beforeEach(expressServer, middlewares.commonRenderValues, function (expressServer) {
+  expressServer.get('/', routes.index);
 
-// Create, edit or show a job
-expressServer.get('/jobs/new', middlewares.commonRenderValues, routes.createJob.displayForm);
-expressServer.post('/jobs/new', middlewares.commonRenderValues, routes.createJob.create, routes.createJob.displayForm);
-expressServer.get('/jobs/:name/edit', middlewares.commonRenderValues, routes.createJob.populateFormForEdition, routes.createJob.displayForm);
-expressServer.get('/jobs/:name', middlewares.commonRenderValues, routes.jobHomepage);
+  // Create, edit or show a job
+  expressServer.get('/jobs/new', routes.createJob.displayForm);
+  expressServer.post('/jobs/new', routes.createJob.create, routes.createJob.displayForm);
+  expressServer.get('/jobs/:name/edit', routes.createJob.populateFormForEdition, routes.createJob.displayForm);
+  expressServer.get('/jobs/:name', routes.jobHomepage);
 
-// Create or show a build
-expressServer.get('/jobs/:name/builds/new', middlewares.commonRenderValues, routes.build.newBuildWebpage);
-expressServer.get('/jobs/:name/builds/:buildNumber', middlewares.commonRenderValues, routes.build.buildRecap);
-expressServer.get('/jobs/:name/builds/:buildNumber/log', middlewares.commonRenderValues, routes.build.buildLog);
+  // Create or show a build
+  expressServer.get('/jobs/:name/builds/new', routes.build.newBuildWebpage);
+  expressServer.get('/jobs/:name/builds/:buildNumber', routes.build.buildRecap);
+  expressServer.get('/jobs/:name/builds/:buildNumber/log', routes.build.buildLog);
+
+});
 
 // Handle payload delivered by Github
 expressServer.post('/public/githubwebhook', routes.handleGithubWebhook);
-
 
 // Test
 expressServer.get('/current', function (req, res, next) {

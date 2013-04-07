@@ -6,6 +6,7 @@
 var config = require('../lib/config')
   , Job = require('../lib/job')
   , executor = require('../lib/executor')
+  , moment = require('moment')
   ;
 
 function newBuildWebpage (req, res, next) {
@@ -57,6 +58,7 @@ function buildRecap (req, res, next) {
       if (err) { return currentBuild(req, res, next); }
 
       values.build = buildData;
+      values.build.date = moment(values.build.date).format('MMMM Do YYYY HH:mm:ss');
 
       return res.render('layout', { values: values
                                   , partials: partials

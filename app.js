@@ -1,7 +1,3 @@
-/**
- * The application itself.
- */
-
 var Job = require('./lib/job')
   , config = require('./lib/config')
   , customUtils = require('./lib/customUtils')
