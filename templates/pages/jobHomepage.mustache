@@ -1,9 +1,18 @@
-<h2 class="title">{{job.name}} <a href="/jobs/{{job.name}}/edit">(edit)</a></h2>
-<br><br>
+<h2 class="title">{{job.name}}</h2>
+<br>
 
+<hr>
+<h4>Configuration <a href="/jobs/{{job.name}}/edit">(change)</a></h4>
 Repo: {{job.repoSSHUrl}}<br>
 Branch: {{job.branch}}<br>
 Number of builds: {{job.numberOfBuilds}}<br><br>
+
+<hr>
+<h4>Status</h4>
+Job is enabled
+
+<hr>
+<h4>Builds</h4>
 
 <a href="/jobs/{{job.name}}/builds/new" class="btn">Launch a new build</a><br><br>
 

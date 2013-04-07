@@ -19,6 +19,7 @@ module.exports = function (req, res, next) {
     values.job = job;
     values.job.numberOfBuilds = job.nextBuildNumber - 1;
     values.job.previousBuilds = customUtils.objectToArrayInOrder(job.previousBuilds);
+    values.job.previousBuilds.sort(function (a, b) { return (new Date(b.date)).getTime() - (new Date(a.date)).getTime(); });
 
     values.job.previousBuilds.forEach(function (build) {
       build.date = moment(build.date).format('MMMM Do YYYY HH:mm:ss');
