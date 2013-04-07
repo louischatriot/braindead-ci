@@ -17,9 +17,9 @@ module.exports = function (req, res, next) {
     , receivedBranch = payload.ref.replace(/^.*\//,'')
     , jobToBuild;
 
-  // Build all jobs corresponding using the repo and branch of this push
+  // Build all the enabled jobs corresponding using the repo and branch of this push
   jobs.forEach(function (name) {
-    if (jobsMetadata[name].githubRepoUrl === receivedGithubRepoUrl && jobsMetadata[name].branch === receivedBranch) {
+    if (jobsMetadata[name].githubRepoUrl === receivedGithubRepoUrl && jobsMetadata[name].branch === receivedBranch && jobsMetadata[name].enabled) {
       executor.registerBuild(name);
     }
   });

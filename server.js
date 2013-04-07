@@ -57,11 +57,13 @@ beforeEach(expressServer, middlewares.commonRenderValues, function (expressServe
   expressServer.get('/jobs/:name/edit', routes.createJob.populateFormForEdition, routes.createJob.displayForm);
   expressServer.get('/jobs/:name', routes.jobHomepage);
 
+  expressServer.put('/jobs/:name/enable', routes.setEnabledState.enableJob);
+  expressServer.put('/jobs/:name/disable', routes.setEnabledState.disableJob);
+
   // Create or show a build
   expressServer.get('/jobs/:name/builds/new', routes.build.newBuildWebpage);
   expressServer.get('/jobs/:name/builds/:buildNumber', routes.build.buildRecap);
   expressServer.get('/jobs/:name/builds/:buildNumber/log', routes.build.buildLog);
-
 });
 
 // Handle payload delivered by Github

@@ -18,9 +18,7 @@ function loadJobMetadata (name, callback) {
     res.repoSSHUrl = config.repoSSHUrl;
     res.branch = config.branch;
     res.nextBuildNumber = config.nextBuildNumber;
-    if (config.nextBuildNumber !== 0) {
-      res.latestBuild = config.previousBuilds[(config.nextBuildNumber - 1).toString()];
-    }
+    res.enabled = config.enabled;
 
     return callback(null, res);
   });

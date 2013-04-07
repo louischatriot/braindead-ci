@@ -8,13 +8,47 @@ Branch: {{job.branch}}
 
 <hr style="margin-bottom: 5px; margin-top: 35px;">
 <h4>Status</h4>
-Job is enabled
+{{#job.enabled}}
+  Job is enabled. <button id='disable-job' class="btn btn-small">Disable it</button>
+{{/job.enabled}}
+{{^job.enabled}}
+  Job is disabled. <button id='enable-job' class="btn btn-small">Enable it</button>
+{{/job.enabled}}
 
 <hr style="margin-bottom: 5px; margin-top: 35px;">
-<h4>Builds ({{job.numberOfBuilds}})&nbsp;&nbsp;&nbsp;<a href="/jobs/{{job.name}}/builds/new" class="btn btn-small">New build</a></h4>
+<h4>Builds ({{job.numberOfBuilds}})&nbsp;&nbsp;&nbsp;<button class="btn btn-small" id="new-build" style="position: relative; top:-2px;">New build</button></h4>
 
 {{#job.previousBuilds}}
 <a href="/jobs/{{job.name}}/builds/{{number}}" class="build-{{#success}}success{{/success}}{{^success}}fail{{/success}}">
   Build #{{number}} ({{date}})
 </a><br>
 {{/job.previousBuilds}}
+
+
+<script>
+  var enabled = {{job.enabled}}
+    , $newBuildButton = $('#new-build')
+    ;
+
+  // Allow to build the job only if it is enabled
+  if (!enabled) {
+    $newBuildButton.addClass('disabled');
+  } else {
+    $newBuildButton.on('click', function () {
+      window.location = '/jobs/{{job.name}}/builds/new';
+    });
+  }
+
+  // Manage enabled/disabled state change
+  $('#disable-job').on('click', function () {
+    $.ajax({ url: '/jobs/{{job.name}}/disable'
+           , type: 'PUT'
+           }).done(function () { window.location.reload(true); });
+  });
+
+  $('#enable-job').on('click', function () {
+    $.ajax({ url: '/jobs/{{job.name}}/enable'
+           , type: 'PUT'
+           }).done(function () { window.location.reload(true); });
+  });
+</script>

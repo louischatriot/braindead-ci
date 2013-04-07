@@ -37,9 +37,11 @@ function create(req, res, next) {
   var values = req.renderValues || {}
     , errors = []
     , isInEditMode = req.body.editMode.toString() === 'true'
+    , currentName = req.body.currentName
     ;
 
   delete req.body.editMode;
+  delete req.body.currentName;
   errors = Job.validate(req.body);
   if (errors) {
     validation.prepareErrorsForDisplay(req, errors, req.body);
@@ -47,7 +49,7 @@ function create(req, res, next) {
   }
 
   if (isInEditMode) {
-    Job.getJob(req.body.name, function (err, job) {   // Cant change the name yet oO
+    Job.getJob(currentName, function (err, job) {
       job.edit(req.body, function () {
         if (err) {
           validation.prepareErrorsForDisplay(req, ['Something strange happened, please try again'], req.body);
