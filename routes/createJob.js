@@ -28,6 +28,7 @@ function displayForm (req, res, next) {
 function populateFormForEdition (req, res, next) {
   Job.getJob(req.params.name, function (err, job) {
     req.renderValues.userInput = job;
+    req.renderValues.userInput.currentName = job.name;
     req.renderValues.editMode = true;
     return next();
   });
