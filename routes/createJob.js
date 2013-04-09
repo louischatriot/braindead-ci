@@ -29,7 +29,7 @@ function populateFormForEdition (req, res, next) {
   Job.getJob(req.params.name, function (err, job) {
     req.renderValues.userInput = job;
     req.renderValues.userInput.currentName = job.name;
-    req.renderValues.editMode = true;
+    req.renderValues.userInput.editMode = true;
     return next();
   });
 }
@@ -41,8 +41,8 @@ function create(req, res, next) {
     , currentName = req.body.currentName
     ;
 
-  delete req.body.editMode;
-  delete req.body.currentName;
+  req.body.editMode = isInEditMode;
+  //delete req.body.currentName;
   errors = Job.validate(req.body);
   if (errors) {
     validation.prepareErrorsForDisplay(req, errors, req.body);
