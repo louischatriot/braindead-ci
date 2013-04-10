@@ -35,7 +35,7 @@ function loadJobMetadata (name, callback) {
  * Add job metadata to all the jobs metadata
  * Callback signature: err
  */
-function addJobMetadata (name, cb) {
+function updateJobMetadata (name, cb) {
   var callback = cb || function () {};
 
   loadJobMetadata(name, function (err, jobMetadata) {
@@ -61,7 +61,7 @@ function addAllJobsMetadata (callback) {
     , function (cb) {
         var name = names[i];
         i += 1;
-        addJobMetadata(name, cb);
+        updateJobMetadata(name, cb);
       }
     , function (err) {
         if (err) { return callback(err); }
@@ -107,5 +107,5 @@ function getJobsMetadata () {
 
 module.exports.init = init;
 module.exports.getJobsMetadata = getJobsMetadata;
-module.exports.addJobMetadata = addJobMetadata;
+module.exports.updateJobMetadata = updateJobMetadata;
 module.exports.changeJobName = changeJobName;

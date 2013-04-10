@@ -67,7 +67,7 @@ function create(req, res, next) {
         return displayForm(req, res, next);
       }
 
-      app.addJobMetadata(req.body.name, function () {
+      app.updateJobMetadata(req.body.name, function () {
         res.redirect(302, '/jobs/' + req.body.name);
       });
     });
