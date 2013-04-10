@@ -1,0 +1,35 @@
+<h2 class="title">Dashboard</h2>
+
+<br>
+<table class="table">
+<thead>
+  <tr>
+    <th>Job name</th>
+    <th>Enabled?</th>
+    <th>Last build</th>
+  </tr>
+</thead>
+<tbody>
+  {{#dashboardData}}
+  <tr>
+    <td>
+      {{name}}
+    </td>
+    <td>
+      {{#enabled}}<span class="label label-success">Yes</span>{{/enabled}}
+      {{^enabled}}<span class="label label-important">No</span>{{/enabled}}
+    </td>
+    <td>
+      {{#latestBuild}}
+        {{#success}}<span class="label label-success">Success</span>{{/success}}
+        {{^success}}<span class="label label-important">Failure</span>{{/success}}
+      {{/latestBuild}}
+
+      {{^latestBuild}}
+        <span class="label">No build yet</span>
+      {{/latestBuild}}
+    </td>
+  </tr>
+  {{/dashboardData}}
+  </tbody>
+</table>

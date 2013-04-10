@@ -20,6 +20,12 @@ function loadJobMetadata (name, callback) {
     res.nextBuildNumber = config.nextBuildNumber;
     res.enabled = config.enabled;
 
+    if (config.nextBuildNumber > 1) {
+      res.latestBuild = config.previousBuilds[config.nextBuildNumber - 1];
+    } else {
+      res.latestBuild = null;
+    }
+
     return callback(null, res);
   });
 }
