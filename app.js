@@ -50,7 +50,7 @@ function updateJobMetadata (name, cb) {
  * Load all the metadata for all jobs. Doesn't include build information
  * Callback signature: err
  */
-function addAllJobsMetadata (callback) {
+function loadAllJobsMetadata (callback) {
   var i = 0;
 
   Job.loadAllJobsNames(function (err, names) {
@@ -89,7 +89,7 @@ function init (callback) {
   customUtils.ensureFolderExists(config.workspace, function (err) {
     if (err) { return callback("Couldn't ensure the workspace exists"); }
 
-    addAllJobsMetadata(function (err) {
+    loadAllJobsMetadata(function (err) {
       if (err) { return callback("Couldn't load the jobs metadata"); }
       callback();
     });
