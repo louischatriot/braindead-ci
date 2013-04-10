@@ -6,6 +6,7 @@
 var config = require('../lib/config')
   , Job = require('../lib/job')
   , app = require('../app')
+  , moment = require('moment')
   ;
 
 module.exports = function (req, res, next) {
@@ -18,6 +19,9 @@ module.exports = function (req, res, next) {
   req.renderValues.jobsNames.forEach(function (name) {
     var jobData = jobsMetadata[name];
     jobData.name = name;
+    if (jobData.latestBuild) {
+      jobData.latestBuild.timeago = moment(jobData.latestBuild.date).fromNow();
+    }
     dashboardData.push(jobData);
   });
 

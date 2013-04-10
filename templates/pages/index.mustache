@@ -7,6 +7,7 @@
     <th>Job name</th>
     <th>Enabled?</th>
     <th>Last build</th>
+    <th>When?</th>
   </tr>
 </thead>
 <tbody>
@@ -15,10 +16,12 @@
     <td>
       {{name}}
     </td>
+
     <td>
       {{#enabled}}<span class="label label-success">Yes</span>{{/enabled}}
       {{^enabled}}<span class="label label-important">No</span>{{/enabled}}
     </td>
+
     <td>
       {{#latestBuild}}
         {{#success}}<span class="label label-success">Success</span>{{/success}}
@@ -28,6 +31,10 @@
       {{^latestBuild}}
         <span class="label">No build yet</span>
       {{/latestBuild}}
+    </td>
+
+    <td>
+      {{#latestBuild}}{{timeago}}{{/latestBuild}}
     </td>
   </tr>
   {{/dashboardData}}
