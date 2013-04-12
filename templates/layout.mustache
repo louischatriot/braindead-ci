@@ -27,6 +27,25 @@
           </ul>
           <br>
           <a href="/jobs/new" class="btn">New job</a>
+
+          <hr>
+          <strong>Executor status:</strong><br>
+          {{#idle}}
+            Braindead is idle
+          {{/idle}}
+          {{^idle}}
+            Building {{currentJobName}}
+          {{/idle}}
+          <br><br>
+          {{#someJobsQueued}}
+            In the queue:
+            <ul>
+              {{#queuedJobs}}
+                <li>{{.}}</li>
+              {{/queuedJobs}}
+            </ul>
+          {{/someJobsQueued}}
+
         </div>
 
         <div class="span9">
