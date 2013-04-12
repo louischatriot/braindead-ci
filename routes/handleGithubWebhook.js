@@ -31,7 +31,7 @@ module.exports = function (req, res, next) {
       if (jobsMetadata[name].enabled) {
         executor.registerBuild(name);
       } else {
-        disabledMessage.message = name + ' was not built since its in disabled state';
+        disabledMessage.message = name + " was not built since it's in disabled state";
         customUtils.sendMessageToHipchat(disabledMessage);
       }
     }
