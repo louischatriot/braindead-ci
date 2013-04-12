@@ -27,7 +27,8 @@
     "async": "0.1.x",
     "request": "2.9.x",
     "moment": "~2.0.0",
-    "express-group-handlers": "~0.1.1"
+    "express-group-handlers": "~0.1.1",
+    "rimraf": "~2.1.4"
   },
   "devDependencies": {
     "chai": "1.0.x",

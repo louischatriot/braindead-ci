@@ -16,7 +16,6 @@ module.exports = function (req, res, next) {
     , payload = JSON.parse(req.body.payload)
     , receivedGithubRepoUrl = payload.repository.url
     , receivedBranch = payload.ref.replace(/^.*\//,'')
-    , jobToBuild
     , disabledMessage = { room_id: 'Deployment'
                         , from: 'Braindead CI'
                         , message_format: 'html'
