@@ -13,7 +13,7 @@ var Job = require('./lib/job')
 function loadJobMetadata (name, callback) {
   Job.loadConfig(name, function (err, config) {
     var res = {};
-    if (err) { return cb(err); }
+    if (err) { return callback(err); }
     res.githubRepoUrl = config.githubRepoUrl;
     res.repoSSHUrl = config.repoSSHUrl;
     res.branch = config.branch;
