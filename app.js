@@ -4,6 +4,7 @@ var Job = require('./lib/job')
   , async = require('async')
   , jobsMetadata = {}
   , server = require('./server')
+  , db = require('./lib/db')
   ;
 
 
@@ -100,7 +101,17 @@ function init (callback) {
 
     loadAllJobsMetadata(function (err) {
       if (err) { return callback("Couldn't load the jobs metadata"); }
-      server.launchServer(callback);
+
+      db.initialize(function (err) {
+        if (err) { return callback("Couldn't initialize the database"); }
+
+        db.jobs.myFind({ name: 'med' }, function (err, res) {
+          console.log('----===----');
+          console.log(res);
+        });
+
+        server.launchServer(callback);
+      });
     });
   });
 }

@@ -24,12 +24,12 @@
   "dependencies": {
     "h4e": "0.3.0",
     "express": "3.0.6",
-    "async": "0.1.x",
     "request": "2.9.x",
     "moment": "~2.0.0",
     "express-group-handlers": "~0.1.1",
     "rimraf": "~2.1.4",
-    "nstore": "~0.5.2"
+    "nstore": "~0.5.2",
+    "async": "~0.2.7"
   },
   "devDependencies": {
     "chai": "1.0.x",
