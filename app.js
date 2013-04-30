@@ -3,6 +3,7 @@ var Job = require('./lib/job')
   , customUtils = require('./lib/customUtils')
   , async = require('async')
   , jobsMetadata = {}
+  , server = require('./server')
   ;
 
 
@@ -83,6 +84,14 @@ function changeJobName (name, newName) {
 
 
 /**
+ * Returns the jobs metadata (figures ...)
+ */
+function getJobsMetadata () {
+  return jobsMetadata;
+}
+
+
+/**
  * Initialize the application
  */
 function init (callback) {
@@ -91,20 +100,30 @@ function init (callback) {
 
     loadAllJobsMetadata(function (err) {
       if (err) { return callback("Couldn't load the jobs metadata"); }
-      callback();
+      server.launchServer(callback);
     });
   });
 }
 
 
-/**
- * Returns the jobs metadata (figures ...)
+/*
+ * If we executed this module directly, launch the server.
+ * If not, let the module which required server.js launch it.
  */
-function getJobsMetadata () {
-  return jobsMetadata;
+if (module.parent === null) {
+  init(function (err) {
+    if (err) {
+      console.log("An error occured, logging error and stopping the server");
+      console.log(err);
+      process.exit(1);
+    } else {
+      console.log('Workspace found. Server started on port ' + config.svPort);
+    }
+  });
 }
 
 
+// Interface
 module.exports.init = init;
 module.exports.getJobsMetadata = getJobsMetadata;
 module.exports.updateJobMetadata = updateJobMetadata;

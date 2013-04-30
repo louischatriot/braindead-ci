@@ -6,7 +6,6 @@ var express = require('express')
   , http = require('http')
   , config = require('./lib/config')
   , expressServer
-  , app = require('./app')
   , Job = require('./lib/job')
   , routes = require('./lib/routes')
   , middlewares = require('./lib/middlewares')
@@ -83,19 +82,15 @@ expressServer.launchServer = function (cb) {
     , self = this
     ;
 
-  app.init(function (err) {
-    if (err) { return callback(err); }
+  self.apiServer = http.createServer(self);   // Let's not call it 'server' we never know if Express will want to use this variable!
 
-    self.apiServer = http.createServer(self);   // Let's not call it 'server' we never know if Express will want to use this variable!
-
-    // Handle any connection error gracefully
-    self.apiServer.on('error', function () {
-      return callback("An error occured while launching the server, probably a server is already running on the same port!");
-    });
-
-    // Begin to listen. If the callback gets called, it means the server was successfully launched
-    self.apiServer.listen.apply(self.apiServer, [config.svPort, callback]);
+  // Handle any connection error gracefully
+  self.apiServer.on('error', function () {
+    return callback("An error occured while launching the server, probably a server is already running on the same port!");
   });
+
+  // Begin to listen. If the callback gets called, it means the server was successfully launched
+  self.apiServer.listen.apply(self.apiServer, [config.svPort, callback]);
 };
 
 
@@ -114,19 +109,5 @@ expressServer.stopServer = function (cb) {
 };
 
 
-/*
- * If we executed this module directly, launch the server.
- * If not, let the module which required server.js launch it.
- */
-if (module.parent === null) {
-  expressServer.launchServer(function (err) {
-    if (err) {
-      console.log("An error occured, logging error and stopping the server");
-      console.log(err);
-      process.exit(1);
-    } else {
-      console.log('Workspace found. Server started on port ' + config.svPort);
-    }
-  });
-}
-
+// Interface
+module.exports = expressServer;
