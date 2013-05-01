@@ -105,7 +105,7 @@ function init (callback) {
       db.initialize(function (err) {
         if (err) { return callback("Couldn't initialize the database"); }
 
-        db.jobs.myFind({ name: 'med' }, function (err, res) {
+        db.jobs.myFindOne({name: 'unautr'}, function (err, res) {
           console.log('----===----');
           console.log(res);
         });
