@@ -12,7 +12,7 @@ var Job = require('./lib/job')
  * Initialize the application
  */
 function init (callback) {
-  customUtils.ensureFolderExists(config.workspace, function (err) {
+  customUtils.ensureDirectoryExists(config.workspace, function (err) {
     if (err) { return callback("Couldn't ensure the workspace exists"); }
 
     db.initialize(function (err) {
