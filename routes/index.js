@@ -17,7 +17,8 @@ module.exports = function (req, res, next) {
 
   db.jobs.find({}, function (err, jobs) {
     jobs.forEach(function (job) {
-      if (job.latestBuild) {
+      if (job.nextBuildNumber && job.nextBuildNumber > 1) {
+        job.latestBuild = job.previousBuilds[job.nextBuildNumber - 1];
         job.latestBuild.timeago = moment(job.latestBuild.date).fromNow();
       }
       dashboardData.push(job);
