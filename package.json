@@ -29,7 +29,8 @@
     "express-group-handlers": "~0.1.1",
     "rimraf": "~2.1.4",
     "async": "~0.2.7",
-    "nedb": "0.0.4"
+    "nedb": "0.0.4",
+    "underscore": "~1.4.4"
   },
   "devDependencies": {
     "chai": "1.0.x",
