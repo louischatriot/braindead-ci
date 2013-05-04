@@ -28,8 +28,8 @@
     "moment": "~2.0.0",
     "express-group-handlers": "~0.1.1",
     "rimraf": "~2.1.4",
-    "nstore": "~0.5.2",
-    "async": "~0.2.7"
+    "async": "~0.2.7",
+    "nedb": "0.0.3"
   },
   "devDependencies": {
     "chai": "1.0.x",
