@@ -39,7 +39,3 @@ if (module.parent === null) {
     }
   });
 }
-
-
-// Interface
-module.exports.init = init;
