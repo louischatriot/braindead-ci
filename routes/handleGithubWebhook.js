@@ -12,6 +12,7 @@ var Job = require('../lib/job')
 
 
 module.exports = function (req, res, next) {
+  console.log("CALLED");
   db.jobs.find({}, function (err, jobs) {
     var jobsNames = _.pluck(jobs, 'name');
     , payload = JSON.parse(req.body.payload)
