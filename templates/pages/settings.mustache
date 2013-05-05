@@ -7,4 +7,51 @@
 <br>
 
 
-SFDSSFDFSD
+{{#firstTimeUse}}
+<div class="alert alert-success">
+Fill in the settings and you're good to go. You can always come back to this page and
+change them by clicking on the 'settings' link on the left.
+</div>
+{{/firstTimeUse}}
+
+
+<form class="form-horizontal" method="post" action="/jobs/new">
+  <!-- Github token -->
+  <div class="control-group">
+    <label class="control-label" for="githubToken">Token for Github<br><em style="color: #888;">(optional)</em></label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" id="githubToken" placeholder="Any alphanumerical string" name="githubToken" value="{{settings.githubToken}}">
+      <i class="icon-question-sign" data-content="Create it if you want your jobs to automatically be built and deployed on a push to their Github repo. Then you just have to create a new service hook for the Github repo. Use WebHook URL https://ci.example.com/githubwebhook?token=your_token" data-title="Token for Github"></i>
+    </div>
+  </div>
+
+  <!-- Hipchat token -->
+  <div class="control-group">
+    <label class="control-label" for="hipchatToken">Hipchat API token<br><em style="color: #888;">(optional)</em></label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" id="hipchatToken" placeholder="e.g. 7336b9f5190d3dece963ec9528ef" name="hipchatToken" value="{{settings.hipchatToken}}">
+      <i class="icon-question-sign" data-content="If you use Hipchat, enter your API token and you'll automatically be notified of all build results." data-title="Hipchat API token"></i>
+    </div>
+  </div>
+
+  <input type="hidden" name="firstTimeUse" value="{{firstTimeUse}}">
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Save settings</button>
+    </div>
+  </div>
+</form>
+
+<script>
+  console.log($('.icon-question-sign'));
+  $('.icon-question-sign').popover({ animation: true
+                                   , trigger: 'hover'
+                                   , placement: 'bottom'
+                                   });
+</script>
+<style type="text/css">
+.popover {
+  width: 400px;
+}
+</style>

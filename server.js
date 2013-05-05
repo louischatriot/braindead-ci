@@ -51,7 +51,8 @@ beforeEach(expressServer, middlewares.commonRenderValues, middlewares.checkFirst
   expressServer.get('/', routes.index);
 
   // Show the settings page
-  expressServer.get('/settings', routes.settings);
+  expressServer.get('/settings', routes.settings.displayForm);
+  expressServer.post('/settings', routes.settings.update, routes.settings.displayForm);
 
   // Create, edit or show a job
   expressServer.get('/jobs/new', routes.createJob.displayForm);
