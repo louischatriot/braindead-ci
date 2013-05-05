@@ -19,8 +19,17 @@ function displayForm (req, res, next) {
 
 
 function update (req, res, next) {
+  var newSettings = { type: 'generalSettings'
+                    , githubToken: req.body.githubToken
+                    , hipchatToken: req.body.hipchatToken
+                    , hipchatRoom: req.body.hipchatRoom
+                    };
 
+  db.settings.update({ type: 'generalSettings' }, newSettings, { multi: false, upsert: true }, function (err) {
+    if (err) { return next(); }   // Shouldn't happen anyway
 
+    return next();
+  });
 }
 
 

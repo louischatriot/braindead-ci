@@ -5,6 +5,7 @@
   <h2 class="title">Settings</h2>
 {{/firstTimeUse}}
 <br>
+<br>
 
 
 {{#firstTimeUse}}
@@ -12,10 +13,11 @@
 Fill in the settings and you're good to go. You can always come back to this page and
 change them by clicking on the 'settings' link on the left.
 </div>
+<br>
 {{/firstTimeUse}}
 
 
-<form class="form-horizontal" method="post" action="/jobs/new">
+<form class="form-horizontal" method="post" action="/settings">
   <!-- Github token -->
   <div class="control-group">
     <label class="control-label" for="githubToken">Token for Github<br><em style="color: #888;">(optional)</em></label>
@@ -25,12 +27,20 @@ change them by clicking on the 'settings' link on the left.
     </div>
   </div>
 
-  <!-- Hipchat token -->
+  <!-- Hipchat token and room -->
   <div class="control-group">
     <label class="control-label" for="hipchatToken">Hipchat API token<br><em style="color: #888;">(optional)</em></label>
     <div class="controls">
       <input type="text" class="input-xlarge" id="hipchatToken" placeholder="e.g. 7336b9f5190d3dece963ec9528ef" name="hipchatToken" value="{{settings.hipchatToken}}">
       <i class="icon-question-sign" data-content="If you use Hipchat, enter your API token and you'll automatically be notified of all build results." data-title="Hipchat API token"></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="hipchatRoom">Hipchat room<br><em style="color: #888;">(optional)</em></label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" id="hipchatRoom" placeholder="e.g. Deployment" name="hipchatRoom" value="{{settings.hipchatRoom}}">
+      <i class="icon-question-sign" data-content="The Hipchat room you want Braindead to use to tell you the build results." data-title="Hipchat room"></i>
     </div>
   </div>
 
@@ -43,8 +53,8 @@ change them by clicking on the 'settings' link on the left.
   </div>
 </form>
 
+<!-- Manage help popovers -->
 <script>
-  console.log($('.icon-question-sign'));
   $('.icon-question-sign').popover({ animation: true
                                    , trigger: 'hover'
                                    , placement: 'bottom'
