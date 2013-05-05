@@ -24,7 +24,10 @@ module.exports = function (req, res, next) {
         if (job.enabled) {
           executor.registerBuild(job.name);
         } else {
-          job.advertiseOnHipchat(null);
+          Job.getJob(job.name, function (err, job) {
+            if (err || !job) { return; }
+            job.advertiseOnHipchat(null);
+          });
         }
       }
     });
