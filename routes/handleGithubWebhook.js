@@ -26,7 +26,7 @@ module.exports = function (req, res, next) {
         } else {
           Job.getJob(job.name, function (err, job) {
             if (err || !job) { return; }
-            job.advertiseOnHipchat(null);
+            job.advertiseBuildResult(null);
           });
         }
       }
