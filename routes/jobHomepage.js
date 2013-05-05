@@ -25,6 +25,10 @@ module.exports = function (req, res, next) {
       build.date = moment(build.date).format('MMMM Do YYYY HH:mm:ss');
     });
 
+    values.taskManagerOnly = false;
+    if (!job.repoSSHUrl || job.repoSSHUrl.length === 0) { values.taskManagerOnly = true; }
+    if (!job.branch || job.branch.length === 0) { values.taskManagerOnly = true; }
+
     return res.render('layout', { values: values
                                 , partials: partials
                                 });

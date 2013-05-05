@@ -2,9 +2,20 @@
 
 <hr style="margin-bottom: 5px;">
 <h4>Configuration <a href="/jobs/{{job.name}}/edit">(change)</a></h4>
-Github repo url: <a href="{{job.githubRepoUrl}}" target="_blank">{{job.githubRepoUrl}}</a><br>
-SSH url: {{job.repoSSHUrl}}<br>
-Branch: {{job.branch}}
+{{#job.githubRepoUrl}}
+  Github repo url: <a href="{{job.githubRepoUrl}}" target="_blank">{{job.githubRepoUrl}}</a><br>
+{{/job.githubRepoUrl}}
+{{^job.githubRepoUrl}}
+  No Github repo url set, builds won't be triggered by a push on Github.<br>
+{{/job.githubRepoUrl}}
+
+{{#taskManagerOnly}}
+  Repo SSH url or branch not set, builds will only execute the deploy script.<br>
+{{/taskManagerOnly}}
+{{^taskManagerOnly}}
+  SSH url: {{job.repoSSHUrl}}<br>
+  Branch: {{job.branch}}
+{{/taskManagerOnly}}
 
 <hr style="margin-bottom: 5px; margin-top: 35px;">
 <h4>Status</h4>
