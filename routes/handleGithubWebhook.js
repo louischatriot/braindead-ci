@@ -26,6 +26,8 @@ module.exports = function (req, res, next) {
                           }
       ;
 
+      console.log(jobsNames);
+
     // Build all the enabled jobs corresponding using the repo and branch of this push
     jobsNames.forEach(function (name) {
       if (jobs[name].githubRepoUrl === receivedGithubRepoUrl && jobs[name].branch === receivedBranch) {
