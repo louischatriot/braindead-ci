@@ -47,8 +47,11 @@ expressServer.get('/assets/bootstrap/:dir/:file', express.static(__dirname));
 expressServer.get('/favicon.ico', function (req, res, next) { return res.send(404); });   // No favicon
 
 // Serve the webpages
-beforeEach(expressServer, middlewares.commonRenderValues, function (expressServer) {
+beforeEach(expressServer, middlewares.checkFirstTimeUse, middlewares.commonRenderValues, function (expressServer) {
   expressServer.get('/', routes.index);
+
+  // Show the settings page
+  expressServer.get('/settings', routes.settings);
 
   // Create, edit or show a job
   expressServer.get('/jobs/new', routes.createJob.displayForm);
