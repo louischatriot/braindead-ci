@@ -70,7 +70,7 @@ beforeEach(expressServer, middlewares.commonRenderValues, middlewares.checkFirst
 });
 
 // Handle payload delivered by Github
-expressServer.post('/public/githubwebhook', routes.handleGithubWebhook);
+expressServer.post('/githubwebhook', routes.handleGithubWebhook);
 
 // Test
 expressServer.get('/current', function (req, res, next) {
