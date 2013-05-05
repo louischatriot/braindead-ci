@@ -14,8 +14,7 @@ var Job = require('../lib/job')
 module.exports = function (req, res, next) {
   console.log("CALLED");
   db.jobs.find({}, function (err, jobs) {
-    var jobsNames = _.pluck(jobs, 'name')
-      , payload = JSON.parse(req.body.payload)
+    var payload = JSON.parse(req.body.payload)
       , receivedGithubRepoUrl = payload.repository.url
       , receivedBranch = payload.ref.replace(/^.*\//,'')
       , disabledMessage = { room_id: 'Deployment'
@@ -26,17 +25,13 @@ module.exports = function (req, res, next) {
                           }
       ;
 
-      console.log(jobsNames);
-      console.log("============");
-      console.log(jobs);
-
     // Build all the enabled jobs corresponding using the repo and branch of this push
-    jobsNames.forEach(function (name) {
-      if (jobs[name].githubRepoUrl === receivedGithubRepoUrl && jobs[name].branch === receivedBranch) {
-        if (jobs[name].enabled) {
-          executor.registerBuild(name);
+    jobs.forEach(function (job) {
+      if (job.githubRepoUrl === receivedGithubRepoUrl && job.branch === receivedBranch) {
+        if (job.enabled) {
+          executor.registerBuild(job.name);
         } else {
-          disabledMessage.message = name + " was not built since it's in disabled state";
+          disabledMessage.message = job.name + " was not built since it's in disabled state";
           customUtils.sendMessageToHipchat(disabledMessage);
         }
       }
