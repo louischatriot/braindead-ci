@@ -21,13 +21,16 @@
         <div class="span3">
           <h1 class="top-left-title"><a href="/">Braindead CI</a></h1>
           <span style="position: relative; top: -10px; opacity: 0.7;"><a style="color:#333; font-style: italic;" href="/settings"><i class="icon-wrench"></i> Settings</a></span>
-          <ul class="nav nav-tabs nav-stacked" id="sidenav">
-            {{#jobsNames}}
-            <li><a href="/jobs/{{.}}">{{.}}</a></li>
-            {{/jobsNames}}
-          </ul>
-          <br>
-          <a href="/jobs/new" class="btn">New job</a>
+
+          {{^firstTimeUse}}
+            <ul class="nav nav-tabs nav-stacked" id="sidenav">
+              {{#jobsNames}}
+              <li><a href="/jobs/{{.}}">{{.}}</a></li>
+              {{/jobsNames}}
+            </ul>
+            <br>
+            <a href="/jobs/new" class="btn">New job</a>
+          {{/firstTimeUse}}
 
           <hr>
           <strong>Executor status:</strong><br>
