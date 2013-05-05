@@ -16,12 +16,6 @@ module.exports = function (req, res, next) {
     var payload = JSON.parse(req.body.payload)
       , receivedGithubRepoUrl = payload.repository.url
       , receivedBranch = payload.ref.replace(/^.*\//,'')
-      , disabledMessage = { room_id: 'Deployment'
-                          , from: 'Braindead CI'
-                          , message_format: 'html'
-                          , notify: 0
-                          , color: 'gray'
-                          }
       ;
 
     // Build all the enabled jobs corresponding using the repo and branch of this push
@@ -30,8 +24,7 @@ module.exports = function (req, res, next) {
         if (job.enabled) {
           executor.registerBuild(job.name);
         } else {
-          disabledMessage.message = job.name + " was not built since it's in disabled state";
-          customUtils.sendMessageToHipchat(disabledMessage);
+          job.advertiseOnHipchat(null);
         }
       }
     });
