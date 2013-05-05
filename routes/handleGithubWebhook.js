@@ -3,16 +3,17 @@
  * launch the corresponding build if necessary
  */
 
-var app = require('../app')
-  , Job = require('../lib/job')
+var Job = require('../lib/job')
   , executor = require('../lib/executor')
   , customUtils = require('../lib/customUtils')
+  , db = require('../lib/db')
+  , _ = require('underscore')
   ;
 
 
 module.exports = function (req, res, next) {
-  var jobsMetadata = app.getJobsMetadata()
-    , jobs = Object.keys(jobsMetadata)
+  db.jobs.find({}, function (err, jobs) {
+    var jobsNames = _.pluck(jobs, 'name');
     , payload = JSON.parse(req.body.payload)
     , receivedGithubRepoUrl = payload.repository.url
     , receivedBranch = payload.ref.replace(/^.*\//,'')
@@ -24,17 +25,18 @@ module.exports = function (req, res, next) {
                         }
     ;
 
-  // Build all the enabled jobs corresponding using the repo and branch of this push
-  jobs.forEach(function (name) {
-    if (jobsMetadata[name].githubRepoUrl === receivedGithubRepoUrl && jobsMetadata[name].branch === receivedBranch) {
-      if (jobsMetadata[name].enabled) {
-        executor.registerBuild(name);
-      } else {
-        disabledMessage.message = name + " was not built since it's in disabled state";
-        customUtils.sendMessageToHipchat(disabledMessage);
+    // Build all the enabled jobs corresponding using the repo and branch of this push
+    jobsNames.forEach(function (name) {
+      if (jobs[name].githubRepoUrl === receivedGithubRepoUrl && jobs[name].branch === receivedBranch) {
+        if (jobs[name].enabled) {
+          executor.registerBuild(name);
+        } else {
+          disabledMessage.message = name + " was not built since it's in disabled state";
+          customUtils.sendMessageToHipchat(disabledMessage);
+        }
       }
-    }
-  });
+    });
 
-  return res.send(200);   // Always return a success
+    return res.send(200);   // Always return a success
+  });
 };
