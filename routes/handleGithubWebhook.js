@@ -14,17 +14,17 @@ var Job = require('../lib/job')
 module.exports = function (req, res, next) {
   console.log("CALLED");
   db.jobs.find({}, function (err, jobs) {
-    var jobsNames = _.pluck(jobs, 'name');
-    , payload = JSON.parse(req.body.payload)
-    , receivedGithubRepoUrl = payload.repository.url
-    , receivedBranch = payload.ref.replace(/^.*\//,'')
-    , disabledMessage = { room_id: 'Deployment'
-                        , from: 'Braindead CI'
-                        , message_format: 'html'
-                        , notify: 0
-                        , color: 'gray'
-                        }
-    ;
+    var jobsNames = _.pluck(jobs, 'name')
+      , payload = JSON.parse(req.body.payload)
+      , receivedGithubRepoUrl = payload.repository.url
+      , receivedBranch = payload.ref.replace(/^.*\//,'')
+      , disabledMessage = { room_id: 'Deployment'
+                          , from: 'Braindead CI'
+                          , message_format: 'html'
+                          , notify: 0
+                          , color: 'gray'
+                          }
+      ;
 
     // Build all the enabled jobs corresponding using the repo and branch of this push
     jobsNames.forEach(function (name) {
