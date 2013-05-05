@@ -27,6 +27,8 @@ module.exports = function (req, res, next) {
       ;
 
       console.log(jobsNames);
+      console.log("============");
+      console.log(jobs);
 
     // Build all the enabled jobs corresponding using the repo and branch of this push
     jobsNames.forEach(function (name) {
