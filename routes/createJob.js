@@ -13,7 +13,7 @@ function displayForm (req, res, next) {
     , partials = { content: '{{>pages/createJob}}' }
     ;
 
-  if (values.editMode) {
+  if (values.userInput && values.userInput.editMode) {
     values.title = "Edit job " + values.userInput.name;
   } else {
     values.title = "Create a new job";

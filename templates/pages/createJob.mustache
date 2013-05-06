@@ -22,42 +22,47 @@
 
   <!-- Github Repo URL -->
   <div class="control-group">
-    <label class="control-label" for="githubRepoUrl">Repo Github url</label>
+    <label class="control-label" for="githubRepoUrl">Repo Github url<br><em style="color: #888;">(optional)</em></label>
     <div class="controls">
       <input type="text" class="input-xlarge" id="githubRepoUrl" placeholder="e.g. https://github.com/organization/repo" name="githubRepoUrl" value="{{userInput.githubRepoUrl}}">
+      &nbsp;<i class="icon-question-sign" data-content="Fill this in if you want this job to automatically be built upon a push to the Github repo. In that case, you also need to create a token for Github in the settings and set up a service hook for the Github repo, with WebHook URL https://ci.example.com/githubwebhook?token=your_token." data-title="Github repo url"></i>
     </div>
   </div>
 
 
   <!-- Repo SSH URL -->
   <div class="control-group">
-    <label class="control-label" for="repoSSHUrl">Git repo SSH url</label>
+    <label class="control-label" for="repoSSHUrl">Git repo SSH url<br><em style="color: #888;">(optional)</em></label>
     <div class="controls">
       <input type="text" class="input-xlarge" id="repoSSHUrl" placeholder="e.g. git@github.com:organization/repo.git" name="repoSSHUrl" value="{{userInput.repoSSHUrl}}">
+      &nbsp;<i class="icon-question-sign" data-content="Url of the Git remote repository for this job. Each build will begin by pulling the code from this remote. Leave empty if you don't want to use the CI capability (in that case, a build will only run the deploy script)." data-title="Repo SSH url"></i>
     </div>
   </div>
 
   <!-- Branch -->
   <div class="control-group">
-    <label class="control-label" for="branch">Branch to build</label>
+    <label class="control-label" for="branch">Branch to build<br><em style="color: #888;">(optional)</em></label>
     <div class="controls">
       <input type="text" class="input-xlarge" id="branch" placeholder="e.g. master" name="branch" value="{{userInput.branch}}">
+      &nbsp;<i class="icon-question-sign" data-content="Branch of the Git repo to build. Leave empty if you don't want to use the CI capability (in that case, only the deploy script will be run)." data-title="Branch"></i>
     </div>
   </div>
 
   <!-- Test Script -->
   <div class="control-group">
-    <label class="control-label" for="testScript">Bash test script</label>
+    <label class="control-label" for="testScript">Bash test script<br><em style="color: #888;">(optional)</em></label>
     <div class="controls">
       <textarea rows="6" class="input-xlarge" id="testScript" placeholder="e.g. npm test" name="testScript">{{userInput.testScript}}</textarea>
+      &nbsp;<i class="icon-question-sign" style="vertical-align: top;" data-content="Will only be run if the repo ssh url and the branch are defined." data-title="Test script"></i>
     </div>
   </div>
 
   <!-- Deploy Script -->
   <div class="control-group">
-    <label class="control-label" for="deployScript">Bash deploy script</label>
+    <label class="control-label" for="deployScript">Bash deploy script<br><em style="color: #888;">(optional)</em></label>
     <div class="controls">
       <textarea rows="6" class="input-xlarge" id="deployScript" placeholder="e.g. sudo start server" name="deployScript">{{userInput.deployScript}}</textarea>
+      &nbsp;<i class="icon-question-sign" style="vertical-align: top;" data-content="Will be passed the environment variable REINSTALL_DEPS, which is set to true if the project's dependencies changed since last build." data-title="Deployment script"></i>
     </div>
   </div>
 
@@ -71,3 +76,15 @@
   </div>
 </form>
 
+<!-- Manage help popovers -->
+<script>
+  $('.icon-question-sign').popover({ animation: true
+                                   , trigger: 'hover'
+                                   , placement: 'bottom'
+                                   });
+</script>
+<style type="text/css">
+.popover {
+  width: 400px;
+}
+</style>
