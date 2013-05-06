@@ -13,7 +13,7 @@ var express = require('express')
   , h4e = require('h4e')
   , executor = require('./lib/executor')
   , beforeEach = require('express-group-handlers').beforeEach
-  , NedbStore = require('./lib/connect-nedb-session')(express)
+  , NedbStore = require('connect-nedb-session')(express)
   ;
 
 

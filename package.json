@@ -30,7 +30,8 @@
     "rimraf": "~2.1.4",
     "async": "~0.2.7",
     "nedb": "0.0.5",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "connect-nedb-session": "0.0.1"
   },
   "devDependencies": {
     "chai": "1.0.x",
