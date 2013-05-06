@@ -53,9 +53,12 @@ expressServer.get('/assets/socket.io/:file', express.static(__dirname));
 expressServer.get('/assets/bootstrap/:dir/:file', express.static(__dirname));
 expressServer.get('/favicon.ico', function (req, res, next) { return res.send(404); });   // No favicon
 
+// Login, logout
+expressServer.get('/login', middlewares.commonRenderValues, routes.login);
+expressServer.get('/logout', routes.logout);
 
 // Serve the webpages
-beforeEach(expressServer, middlewares.commonRenderValues, middlewares.checkFirstTimeUse, function (expressServer) {
+beforeEach(expressServer, middlewares.commonRenderValues, middlewares.checkFirstTimeUse, middlewares.needToBeLoggedIn, function (expressServer) {
   expressServer.get('/', routes.index);
 
   // Show the settings page
