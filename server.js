@@ -13,6 +13,7 @@ var express = require('express')
   , h4e = require('h4e')
   , executor = require('./lib/executor')
   , beforeEach = require('express-group-handlers').beforeEach
+  , NedbStore = require('./lib/connect-nedb-session')(express)
   ;
 
 
@@ -30,12 +31,18 @@ h4e.setup({ app: expressServer
           });
 
 
-/**
- * Middlewares
- *
- */
-
+// Middlewares
+expressServer.use(middlewares.serveFavicon);
 expressServer.use(express.bodyParser());
+expressServer.use(express.cookieParser());
+expressServer.use(express.session({ secret: 'thats some secret'
+                                  , key: 'braindeadsess'
+                                  , cookie: { path: '/'
+                                            , httpOnly: true
+                                            , maxAge: 365 * 24 * 3600 * 1000   // One year
+                                            }
+                                  , store: new NedbStore({ filename: 'workspace/_data/session.db' })
+                                  }));
 expressServer.use(expressServer.router);
 
 
