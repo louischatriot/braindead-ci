@@ -30,7 +30,6 @@ h4e.setup({ app: expressServer
           , extension: 'mustache'
           });
 
-
 // Middlewares
 expressServer.use(middlewares.serveFavicon);
 expressServer.use(express.bodyParser());
@@ -43,6 +42,7 @@ expressServer.use(express.session({ secret: 'thats some secret'
                                             }
                                   , store: new NedbStore({ filename: 'workspace/_data/session.db' })
                                   }));
+expressServer.use(middlewares.populateLoggedInUser);
 expressServer.use(expressServer.router);
 
 
@@ -52,6 +52,7 @@ expressServer.get('/assets/jquery/:file', express.static(__dirname));
 expressServer.get('/assets/socket.io/:file', express.static(__dirname));
 expressServer.get('/assets/bootstrap/:dir/:file', express.static(__dirname));
 expressServer.get('/favicon.ico', function (req, res, next) { return res.send(404); });   // No favicon
+
 
 // Serve the webpages
 beforeEach(expressServer, middlewares.commonRenderValues, middlewares.checkFirstTimeUse, function (expressServer) {
