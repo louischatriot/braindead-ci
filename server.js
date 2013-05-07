@@ -54,7 +54,8 @@ expressServer.get('/assets/bootstrap/:dir/:file', express.static(__dirname));
 expressServer.get('/favicon.ico', function (req, res, next) { return res.send(404); });   // No favicon
 
 // Login, logout
-expressServer.get('/login', middlewares.commonRenderValues, routes.login);
+expressServer.get('/login', middlewares.commonRenderValues, routes.login.displayForm);
+expressServer.post('/login', middlewares.commonRenderValues, routes.login.checkCredentials, routes.login.displayForm);
 expressServer.get('/logout', routes.logout);
 
 // Serve the webpages
