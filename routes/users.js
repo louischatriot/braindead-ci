@@ -18,16 +18,9 @@ function showAll (req, res, next) {
 }
 
 
-function createOne (req, res, next) {
-
-}
-
-/**
- * User onboarding (first time a user gets created)
- */
-function firstTimeDisplayForm (req, res, next) {
+function userCreationForm (req, res, next) {
   var values = req.renderValues || {}
-    , partials = { content: '{{>pages/firstUserCreation}}' }
+    , partials = { content: '{{>pages/userCreationForm}}' }
     ;
 
   return res.render('layout', { values: values
@@ -35,7 +28,8 @@ function firstTimeDisplayForm (req, res, next) {
                               });
 }
 
-function firstTimeUserCreation (req, res, next) {
+
+function createUser (req, res, next) {
   var userData = { login: req.body.login, password: req.body.password }
 
   User.createUser(userData, function (err, user) {
@@ -44,21 +38,43 @@ function firstTimeUserCreation (req, res, next) {
         req.renderValues.userInput = userData;
         req.renderValues.validationErrors = true;
         req.renderValues.errors = _.values(err.validationErrors);
-        return firstTimeDisplayForm(req, res, next);
+        return userCreationForm(req, res, next);
       } else {
         return res.send(500);
       }
     }
 
     req.session.userId = user._id;
-    res.redirect(302, '/');
+    res.redirect(302, '/users');
   });
+}
+
+
+function userEditionForm (req, res, next) {
+  User.getUser(req.params.login, function (err, user) {
+    if (err || !user) { return res.redirect(302, '/users'); }
+
+    var values = req.renderValues || {}
+      , partials = { content: '{{>pages/userEditionForm}}' }
+      ;
+
+    values.login = user.login;
+
+    return res.render('layout', { values: values
+                                , partials: partials
+                                });
+  });
+}
+
+
+function editUser (req, res, next) {
+  console.log("-----------");
 }
 
 
 // Interface
 module.exports.showAll = showAll;
-module.exports.createOne = createOne;
-module.exports.firstTime = { displayForm: firstTimeDisplayForm
-                           , userCreation: firstTimeUserCreation
-                           };
+module.exports.userCreationForm = userCreationForm;
+module.exports.createUser = createUser;
+module.exports.userEditionForm = userEditionForm;
+module.exports.editUser = editUser;

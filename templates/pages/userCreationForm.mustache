@@ -1,15 +1,22 @@
+{{#firstTimeUse}}
 <h2 class="title">Welcome to Braindead CI!</h2>
+{{/firstTimeUse}}
+{{^firstTimeUse}}
+<h2 class="title">Create a new user account</h2>
+{{/firstTimeUse}}
 <br><br>
 
+{{#firstTimeUse}}
 <div class="alert alert-success">
 Seems like you just installed Braindead CI. You need to create a user account
 to go on.
 </div>
 <br>
+{{/firstTimeUse}}
 
 {{>validationErrors}}
 
-<form class="form-horizontal" method="post" action="/users/firstTime">
+<form class="form-horizontal" method="post" action="/users/create">
   <!-- login -->
   <div class="control-group">
     <label class="control-label" for="login">Login</label>
@@ -25,6 +32,8 @@ to go on.
       <input type="password" class="input-xlarge" id="password" name="password" value="">
     </div>
   </div>
+
+  <input type="hidden" name="firstTimeUse" value="{{#firstTimeUse}}true{{/firstTimeUse}}">
 
   <div class="control-group">
     <div class="controls">

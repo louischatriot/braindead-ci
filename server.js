@@ -68,8 +68,10 @@ beforeEach(expressServer, middlewares.commonRenderValues, middlewares.needToBeLo
 
   // User account maangement
   expressServer.get('/users', routes.users.showAll);
-  expressServer.post('/users', routes.users.createOne);
-  expressServer.post('/users/firstTime', routes.users.firstTime.userCreation, routes.users.firstTime.displayForm);
+  expressServer.get('/users/create', routes.users.userCreationForm);
+  expressServer.post('/users/create', routes.users.createUser, routes.users.userCreationForm);
+  expressServer.get('/users/:login/edit', routes.users.userEditionForm);
+  expressServer.post('/users/:login/edit', routes.users.editUser, routes.users.userEditionForm);
 
   // Create, edit or show a job
   expressServer.get('/jobs/new', routes.createJob.displayForm);
