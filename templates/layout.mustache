@@ -20,10 +20,11 @@
       <div class="row">
         <div class="span3">
           <h1 class="top-left-title"><a href="/">Braindead CI</a></h1>
-          <span style="position: relative; top: -10px; opacity: 0.7;"><a style="color:#333; font-style: italic;" href="/settings"><i class="icon-wrench"></i> Settings</a></span>
           {{#loggedUser}}
-          <br>
-          <span style="position: relative; top: -10px; opacity: 0.7;"><a style="color:#333; font-style: italic;" href="/logout"><i class="icon-off"></i> Logout</a></span>
+          <span style="position: relative; top: -10px; opacity: 0.7;">
+          <a style="color:#333; font-style: italic;" href="/settings"><i class="icon-wrench"></i> Settings</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#333; font-style: italic;" href="/logout"><i class="icon-off"></i> Logout</a>
+          </span>
           {{/loggedUser}}
 
           {{^firstTimeUse}}

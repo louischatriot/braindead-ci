@@ -2,6 +2,15 @@
 <br>
 <br>
 
+{{#validationErrors}}
+<div class="alert alert-error">
+  <ul>
+    {{#errors}}
+      <li>{{.}}</li>
+    {{/errors}}
+  </ul>
+</div>
+{{/validationErrors}}
 
 <form class="form-horizontal" method="post" action="/login">
   <!-- login -->
@@ -16,7 +25,7 @@
   <div class="control-group">
     <label class="control-label" for="password">Password</label>
     <div class="controls">
-      <input type="text" class="input-xlarge" id="password" name="password" value="{{userInput.password}}">
+      <input type="password" class="input-xlarge" id="password" name="password" value="{{userInput.password}}">
     </div>
   </div>
 
