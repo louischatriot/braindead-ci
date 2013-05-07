@@ -59,12 +59,17 @@ expressServer.post('/login', middlewares.commonRenderValues, routes.login.checkC
 expressServer.get('/logout', routes.logout);
 
 // Serve the webpages
-beforeEach(expressServer, middlewares.commonRenderValues, middlewares.checkFirstTimeUse, middlewares.needToBeLoggedIn, function (expressServer) {
+beforeEach(expressServer, middlewares.commonRenderValues, middlewares.needToBeLoggedIn, middlewares.checkFirstTimeUse, function (expressServer) {
   expressServer.get('/', routes.index);
 
   // Show the settings page
   expressServer.get('/settings', routes.settings.displayForm);
   expressServer.post('/settings', routes.settings.update, routes.settings.displayForm);
+
+  // User account maangement
+  expressServer.get('/users', routes.users.showAll);
+  expressServer.post('/users', routes.users.createOne);
+  expressServer.post('/users/firstTime', routes.users.firstTime.userCreation, routes.users.firstTime.displayForm);
 
   // Create, edit or show a job
   expressServer.get('/jobs/new', routes.createJob.displayForm);

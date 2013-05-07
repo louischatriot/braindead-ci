@@ -26,9 +26,8 @@ function update (req, res, next) {
                     };
 
   db.settings.update({ type: 'generalSettings' }, newSettings, { multi: false, upsert: true }, function (err) {
-    if (err) { return next(); }   // Shouldn't happen anyway
-
-    return next();
+    // No validation error possible here
+    return res.redirect(302, '/');
   });
 }
 
