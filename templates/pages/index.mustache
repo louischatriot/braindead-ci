@@ -1,6 +1,14 @@
 <h2 class="title">Dashboard</h2>
-
 <br>
+
+{{#noJobYet}}
+<br>
+<div class="alert alert-info">
+Time to create your first job! Click on the 'New job' button on the left.
+</div>
+{{/noJobYet}}
+
+{{^noJobYet}}
 <table class="table">
 <thead>
   <tr>
@@ -40,3 +48,4 @@
   {{/dashboardData}}
   </tbody>
 </table>
+{{/noJobYet}}

@@ -2,14 +2,19 @@ var User = require('../lib/user')
   , _ = require('underscore')
   ;
 
+
 function showAll (req, res, next) {
   var values = req.renderValues || {}
     , partials = { content: '{{>pages/usersShowAll}}' }
     ;
 
-  return res.render('layout', { values: values
-                              , partials: partials
-                              });
+  User.getAllUsers(function (err, users) {
+    values.users = users;
+
+    return res.render('layout', { values: values
+                                , partials: partials
+                                });
+  });
 }
 
 
@@ -18,7 +23,7 @@ function createOne (req, res, next) {
 }
 
 /**
- * User onboarding
+ * User onboarding (first time a user gets created)
  */
 function firstTimeDisplayForm (req, res, next) {
   var values = req.renderValues || {}

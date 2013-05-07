@@ -25,6 +25,7 @@ module.exports = function (req, res, next) {
     });
 
     values.dashboardData = dashboardData;
+    values.noJobYet = dashboardData.length === 0;
 
     return res.render('layout', { values: values
                                 , partials: partials

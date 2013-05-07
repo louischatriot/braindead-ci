@@ -4,7 +4,7 @@
 {{^firstTimeUse}}
   <h2 class="title">Settings</h2>
 {{/firstTimeUse}}
-<br>
+<br><br>
 
 {{#firstTimeUse}}
 <div class="alert alert-success">
@@ -16,6 +16,7 @@ change them by clicking on the 'settings' link on the left.
 
 
 <form class="form-horizontal" method="post" action="/settings">
+  <legend>Third party services</legend>
   <!-- Github token -->
   <div class="control-group">
     <label class="control-label" for="githubToken">Token for Github<br><em style="color: #888;">(optional)</em></label>
