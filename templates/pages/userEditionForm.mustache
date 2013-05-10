@@ -39,4 +39,27 @@ Password changed successfully.
 
 
 <legend>Delete user</legend>
+{{^canDeleteUser}}
+  Cannot delete the last user or Braindead will act as if it was just installed and
+  anybody will be able to create the first admin. Create another user first.
+{{/canDeleteUser}}
+
+{{#canDeleteUser}}
+  <button id='delete-user' class="btn btn-danger">Delete user</button>
+  <script>
+    $('#delete-user').on('click', function () {
+      var sure = confirm('Are you sure you want to delete user {{login}}?');
+
+      if (sure) {
+        $.ajax({ url: '/users/{{login}}'
+               , type: 'DELETE'
+               })
+         .done(function () {
+           alert('User {{login}} deleted.');
+           window.location = '/users';
+         });
+      }
+    });
+  </script>
+{{/canDeleteUser}}
 

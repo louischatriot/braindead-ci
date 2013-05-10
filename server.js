@@ -72,6 +72,7 @@ beforeEach(expressServer, middlewares.commonRenderValues, middlewares.needToBeLo
   expressServer.post('/users/create', routes.users.createUser, routes.users.userCreationForm);
   expressServer.get('/users/:login/edit', routes.users.userEditionForm);
   expressServer.post('/users/:login/edit', routes.users.editUser);
+  expressServer.delete('/users/:login', routes.users.removeUser);
 
   // Create, edit or show a job
   expressServer.get('/jobs/new', routes.createJob.displayForm);

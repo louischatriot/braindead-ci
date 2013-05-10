@@ -55,19 +55,25 @@ function createUser (req, res, next) {
 
 
 function userEditionForm (req, res, next) {
-  User.getUser(req.params.login, function (err, user) {
-    if (err || !user) { return res.redirect(302, '/users'); }
+  var values = req.renderValues || {}
+    , partials = { content: '{{>pages/userEditionForm}}' }
+    ;
 
-    var values = req.renderValues || {}
-      , partials = { content: '{{>pages/userEditionForm}}' }
-      ;
+  User.getAllUsers(function (err, users) {
+    if (err) { return res.redirect(302, '/users'); }
+    values.canDeleteUser = users.length > 1;
 
-    values.login = user.login;
-    values.settingsPage = true;
+    User.getUser(req.params.login, function (err, user) {
+      if (err || !user) { return res.redirect(302, '/users'); }
 
-    return res.render('layout', { values: values
-                                , partials: partials
-                                });
+
+      values.login = user.login;
+      values.settingsPage = true;
+
+      return res.render('layout', { values: values
+                                  , partials: partials
+                                  });
+    });
   });
 }
 
@@ -86,9 +92,19 @@ function editUser (req, res, next) {
 }
 
 
+function removeUser (req, res, next) {
+  User.removeUser(req.params.login, function (err) {
+    if (err) { return res.send(500); }
+
+    return res.send(200);
+  });
+}
+
+
 // Interface
 module.exports.showAll = showAll;
 module.exports.userCreationForm = userCreationForm;
 module.exports.createUser = createUser;
 module.exports.userEditionForm = userEditionForm;
 module.exports.editUser = editUser;
+module.exports.removeUser = removeUser;
