@@ -68,7 +68,16 @@ function userEditionForm (req, res, next) {
 
 
 function editUser (req, res, next) {
-  console.log("-----------");
+  User.changePassword(req.params.login, req.body.password, req.body.newPassword, function (err) {
+    if (err) {
+      req.renderValues.validationErrors = true;
+      req.renderValues.errors = [err];
+    } else {
+      req.renderValues.userEditSuccess = true
+    }
+
+    return userEditionForm(req, res, next);
+  });
 }
 
 

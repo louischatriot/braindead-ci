@@ -1,2 +1,36 @@
-<h2 class="title">Edit user {{login}}</h2>
+<h2 class="title">Edit password for user {{login}}</h2>
+<br><br>
 
+{{#userEditSuccess}}
+<div class="alert alert-success">
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+Password changed successfully.
+</div>
+<br>
+{{/userEditSuccess}}
+
+{{>validationErrors}}
+
+<form class="form-horizontal" method="post" action="/users/{{login}}/edit">
+  <!-- password -->
+  <div class="control-group">
+    <label class="control-label" for="password">Current password</label>
+    <div class="controls">
+      <input type="password" class="input-xlarge" id="password" name="password" value="">
+    </div>
+  </div>
+
+  <!-- new password -->
+  <div class="control-group">
+    <label class="control-label" for="newPassword">New password</label>
+    <div class="controls">
+      <input type="password" class="input-xlarge" id="newPassword" name="newPassword" value="">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Change password</button>
+    </div>
+  </div>
+</form>
