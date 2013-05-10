@@ -75,10 +75,11 @@ beforeEach(expressServer, middlewares.commonRenderValues, middlewares.needToBeLo
   expressServer.delete('/users/:login', routes.users.removeUser);
 
   // Create, edit or show a job
-  expressServer.get('/jobs/new', routes.createJob.displayForm);
-  expressServer.post('/jobs/new', routes.createJob.create, routes.createJob.displayForm);
-  expressServer.get('/jobs/:name/edit', routes.createJob.populateFormForEdition, routes.createJob.displayForm);
-  expressServer.get('/jobs/:name', routes.jobHomepage);
+  expressServer.get('/jobs/new', routes.jobs.displayForm);
+  expressServer.post('/jobs/new', routes.jobs.create);
+  expressServer.get('/jobs/:name/edit', routes.jobs.populateFormForEdition, routes.jobs.displayForm);
+  expressServer.post('/jobs/:name/edit', routes.jobs.edit);
+  expressServer.get('/jobs/:name', routes.jobs.homepage);
 
   expressServer.put('/jobs/:name/enable', routes.setEnabledState.enableJob);
   expressServer.put('/jobs/:name/disable', routes.setEnabledState.disableJob);

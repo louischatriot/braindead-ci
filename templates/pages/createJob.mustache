@@ -1,17 +1,9 @@
 <h2 class="title">{{title}}</h2>
 <br><br>
 
-{{#validationErrors}}
-<div class="alert alert-error">
-  <ul>
-    {{#errors}}
-      <li>{{.}}</li>
-    {{/errors}}
-  </ul>
-</div>
-{{/validationErrors}}
+{{>validationErrors}}
 
-<form class="form-horizontal" method="post" action="/jobs/new">
+<form class="form-horizontal" method="post" action="{{^editMode}}/jobs/new{{/editMode}}{{#editMode}}/jobs/{{currentName}}/edit{{/editMode}}">
   <!-- Name -->
   <div class="control-group">
     <label class="control-label" for="name">Job name</label>
@@ -66,8 +58,8 @@
     </div>
   </div>
 
-  <input type="hidden" name="editMode" value="{{#userInput.editMode}}true{{/userInput.editMode}}">
-  <input type="hidden" name="currentName" value="{{userInput.currentName}}">
+  <input type="hidden" name="editMode" value="{{#editMode}}true{{/editMode}}">
+  <input type="hidden" name="currentName" value="{{currentName}}">
 
   <div class="control-group">
     <div class="controls">
