@@ -18,10 +18,7 @@ var express = require('express')
 
 
 expressServer = express();
-
-if (config.trustProxy) {
-  expressServer.enable('trust proxy');
-}
+expressServer.enable('trust proxy');
 
 //Set up templating
 h4e.setup({ app: expressServer
@@ -116,7 +113,7 @@ expressServer.launchServer = function (cb) {
   });
 
   // Begin to listen. If the callback gets called, it means the server was successfully launched
-  self.apiServer.listen.apply(self.apiServer, [config.svPort, callback]);
+  self.apiServer.listen.apply(self.apiServer, [config.serverPort, callback]);
 };
 
 

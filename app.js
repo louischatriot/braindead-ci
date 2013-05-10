@@ -83,7 +83,7 @@ if (module.parent === null) {
       console.log(err);
       process.exit(1);
     } else {
-      console.log('Workspace found. Server started on port ' + config.svPort);
+      console.log('Workspace found. Server started on port ' + config.serverPort);
     }
   });
 }

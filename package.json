@@ -31,7 +31,8 @@
     "async": "~0.2.7",
     "nedb": "0.0.5",
     "underscore": "~1.4.4",
-    "connect-nedb-session": "0.0.1"
+    "connect-nedb-session": "0.0.1",
+    "commander": "~1.1.1"
   },
   "devDependencies": {
     "chai": "1.0.x",
