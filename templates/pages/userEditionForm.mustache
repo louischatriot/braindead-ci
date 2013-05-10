@@ -40,8 +40,7 @@ Password changed successfully.
 
 <legend>Delete user</legend>
 {{^canDeleteUser}}
-  Cannot delete the last user or Braindead will act as if it was just installed and
-  anybody will be able to create the first admin. Create another user first.
+  Cannot delete the last user, create another user first.
 {{/canDeleteUser}}
 
 {{#canDeleteUser}}
