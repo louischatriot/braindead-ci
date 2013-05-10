@@ -1,7 +1,8 @@
 Braindead CI
 ============
 
-Yep, another continuous integration and deployment server. Why? Lots of reas
+[We're almost production-ready!]
+Yep, another continuous integration and deployment server. Why? Lots of reasons.
 
 ## Features
 * Very fast (starts up in less than a second, page load typically less than 500ms)
