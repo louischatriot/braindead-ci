@@ -15,16 +15,6 @@
     </div>
   </div>
 
-  <!-- Github Repo URL -->
-  <div class="control-group">
-    <label class="control-label" for="githubRepoUrl">Repo Github url<br><em style="color: #888;">(optional)</em></label>
-    <div class="controls">
-      <input type="text" class="input-xlarge" id="githubRepoUrl" placeholder="e.g. https://github.com/organization/repo" name="githubRepoUrl" value="{{userInput.githubRepoUrl}}">
-      &nbsp;<i class="icon-question-sign" data-content="Fill this in if you want this job to automatically be built upon a push to the Github repo. In that case, you also need to create a token for Github in the settings and set up a service hook for the Github repo, with WebHook URL https://ci.example.com/githubwebhook?token=your_token." data-title="Github repo url"></i>
-    </div>
-  </div>
-
-
   <!-- Repo SSH URL -->
   <div class="control-group">
     <label class="control-label" for="repoSSHUrl">Git repo SSH url<br><em style="color: #888;">(optional)</em></label>
@@ -40,6 +30,15 @@
     <div class="controls">
       <input type="text" class="input-xlarge" id="branch" placeholder="e.g. master" name="branch" value="{{userInput.branch}}">
       &nbsp;<i class="icon-question-sign" data-content="Branch of the Git repo to build. Leave empty if you don't want to use the CI capability (in that case, only the deploy script will be run)." data-title="Branch"></i>
+    </div>
+  </div>
+
+  <!-- Github Repo URL -->
+  <div class="control-group">
+    <label class="control-label" for="githubRepoUrl">Repo Github url<br><em style="color: #888;">(optional)</em></label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" id="githubRepoUrl" placeholder="e.g. https://github.com/organization/repo" name="githubRepoUrl" value="{{userInput.githubRepoUrl}}">
+      &nbsp;<i class="icon-question-sign" data-content="Fill this in if you want this job to automatically be built upon a push to the Github repo. In that case, you also need to create a token for Github in the settings and set up a service hook for the Github repo, with WebHook URL https://ci.example.com/githubwebhook?token=your_token." data-title="Github repo url"></i>
     </div>
   </div>
 
