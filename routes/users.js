@@ -1,5 +1,6 @@
 var User = require('../lib/user')
   , _ = require('underscore')
+  , config = require('../lib/config')
   ;
 
 
@@ -26,6 +27,7 @@ function userCreationForm (req, res, next) {
     ;
 
   values.settingsPage = true;
+  values.forgotPassword = config.forgotPassword;
 
   return res.render('layout', { values: values
                               , partials: partials
@@ -35,6 +37,7 @@ function userCreationForm (req, res, next) {
 
 function createUser (req, res, next) {
   var userData = { login: req.body.login, password: req.body.password }
+    ;
 
   User.createUser(userData, function (err, user) {
     if (err) {
@@ -48,9 +51,28 @@ function createUser (req, res, next) {
       }
     }
 
-    req.session.userId = user._id;
+    // Auto-login on user creation if its the first time use
+    if (req.body.firstTimeUse) {
+      req.session.userId = user._id;
+    }
+
+    if (config.forgotPassword) { return createdUserInForgotPasswordMode(req, res, next); }
+
     res.redirect(302, '/users');
   });
+}
+
+
+function createdUserInForgotPasswordMode (req, res, next) {
+  var values = req.renderValues || {}
+    , partials = { content: '{{>pages/userCreatedForgotPassword}}' }
+    ;
+
+  values.settingsPage = true;
+
+  return res.render('layout', { values: values
+                              , partials: partials
+                              });
 }
 
 
