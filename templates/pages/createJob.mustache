@@ -93,11 +93,13 @@
 
 
 <script>
+// Manage help popovers
 $('.icon-question-sign').popover({ animation: true
                                  , trigger: 'hover'
                                  , placement: 'bottom'
                                  });
 
+// Handle job deletion
 $('#delete-job').on('click', function () {
   var sure = confirm('Are you sure you want to delete job {{userInput.name}}?');
 
@@ -111,7 +113,11 @@ $('#delete-job').on('click', function () {
      });
   }
 });
+
+// Select the right jobType option
+$('#jobType option[value="{{userInput.jobType}}"]').attr('selected', 'true');
 </script>
+
 <style type="text/css">
 .popover {
   width: 400px;
