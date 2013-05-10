@@ -1,7 +1,7 @@
 Braindead CI
 ============
 
-[We're almost production-ready! Also, readme is still incomplete]
+**[We're almost production-ready! Also, readme is still incomplete]**
 
 
 Yep, another continuous integration and deployment server. Why? Lots of reasons.
