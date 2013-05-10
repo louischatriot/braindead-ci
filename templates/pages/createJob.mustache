@@ -9,9 +9,22 @@
 <form class="form-horizontal" method="post" action="{{^editMode}}/jobs/new{{/editMode}}{{#editMode}}/jobs/{{currentName}}/edit{{/editMode}}">
   <!-- Name -->
   <div class="control-group">
-    <label class="control-label" for="name">Job name</label>
+    <label class="control-label" for="name">Name</label>
     <div class="controls">
       <input type="text" class="input-xlarge" id="name" placeholder="e.g. Our cool website" name="name" value="{{userInput.name}}">
+    </div>
+  </div>
+
+  <!-- Job type -->
+  <div class="control-group">
+    <label class="control-label" for="jobType">Type</label>
+    <div class="controls">
+      <select name="jobType" id="jobType">
+        {{#jobTypes}}
+          <option value="{{.}}">{{.}}</option>
+        {{/jobTypes}}
+      </select>
+      &nbsp;<i class="icon-question-sign" data-content="If you choose 'Basic', you'll need to tell your test script to reinstall the dependencies. If this is a Node.js project, pick the corresponding option and Braindead will only reinstall dependencies if it needs to, saving you time." data-title="Job type"></i>
     </div>
   </div>
 

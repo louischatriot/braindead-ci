@@ -64,7 +64,9 @@ function init (callback) {
     db.initialize(function (err) {
       if (err) { return callback("Couldn't initialize the database"); }
 
-      server.launchServer(callback);
+      initializeJobTypes(function (err) {
+        server.launchServer(callback);
+      });
     });
   });
 }

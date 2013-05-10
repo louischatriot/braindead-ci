@@ -8,6 +8,8 @@ var config = require('../lib/config')
   , validation = require('../lib/validation')
   , customUtils = require('../lib/customUtils')
   , moment = require('moment')
+  , app = require('../app')
+  , _ = require('underscore')
   ;
 
 /**
@@ -44,6 +46,8 @@ function displayForm (req, res, next) {
     , partials = { content: '{{>pages/createJob}}' }
     ;
 
+  values.jobTypes = Object.keys(app.getAllJobTypes()).sort();
+
   if (values.editMode) {
     values.title = "Edit job " + values.userInput.name;
   } else {
@@ -71,6 +75,7 @@ function create (req, res, next) {
     , errors = []
     ;
 
+console.log(req.body);
   Job.createJob(req.body, function (err) {
     if (err) {
       values.validationErrors = true;
