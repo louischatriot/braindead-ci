@@ -1,8 +1,11 @@
 <h2 class="title">{{title}}</h2>
 <br><br>
 
-{{>validationErrors}}
+{{#editMode}}
+<legend>Configure job</legend>
+{{/editMode}}
 
+{{>validationErrors}}
 <form class="form-horizontal" method="post" action="{{^editMode}}/jobs/new{{/editMode}}{{#editMode}}/jobs/{{currentName}}/edit{{/editMode}}">
   <!-- Name -->
   <div class="control-group">
@@ -68,12 +71,34 @@
   </div>
 </form>
 
-<!-- Manage help popovers -->
+{{#editMode}}
+<br>
+<legend>Delete job</legend>
+<button id='delete-job' class="btn btn-danger">Delete job</button>
+<br><br>
+<br><br>
+{{/editMode}}
+
+
 <script>
-  $('.icon-question-sign').popover({ animation: true
-                                   , trigger: 'hover'
-                                   , placement: 'bottom'
-                                   });
+$('.icon-question-sign').popover({ animation: true
+                                 , trigger: 'hover'
+                                 , placement: 'bottom'
+                                 });
+
+$('#delete-job').on('click', function () {
+  var sure = confirm('Are you sure you want to delete job {{userInput.name}}?');
+
+  if (sure) {
+    $.ajax({ url: '/jobs/{{userInput.name}}'
+           , type: 'DELETE'
+           })
+     .done(function () {
+       alert('Job {{userInput.name}} deleted.');
+       window.location = '/';
+     });
+  }
+});
 </script>
 <style type="text/css">
 .popover {

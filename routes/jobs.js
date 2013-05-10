@@ -79,7 +79,7 @@ function create (req, res, next) {
       return displayForm(req, res, next);
     }
 
-    return res.redirect(302, '/jobs/' + req.body.name);
+    return res.redirect(302, '/jobs/' + req.body.name + '/homepage');
   });
 }
 
@@ -107,8 +107,17 @@ function edit (req, res, next) {
         return displayForm(req, res, next);
       }
 
-      res.redirect(302, '/jobs/' + req.body.name);
+      res.redirect(302, '/jobs/' + req.body.name + '/homepage');
     });
+  });
+}
+
+
+function removeJob (req, res, next) {
+  Job.removeJob(req.params.name, function (err) {
+    if (err) { return res.send(500); }
+
+    return res.send(200);
   });
 }
 
@@ -119,3 +128,4 @@ module.exports.populateFormForEdition = populateFormForEdition;
 module.exports.displayForm = displayForm;
 module.exports.create = create;
 module.exports.edit = edit;
+module.exports.removeJob = removeJob;

@@ -79,7 +79,8 @@ beforeEach(expressServer, middlewares.commonRenderValues, middlewares.needToBeLo
   expressServer.post('/jobs/new', routes.jobs.create);
   expressServer.get('/jobs/:name/edit', routes.jobs.populateFormForEdition, routes.jobs.displayForm);
   expressServer.post('/jobs/:name/edit', routes.jobs.edit);
-  expressServer.get('/jobs/:name', routes.jobs.homepage);
+  expressServer.get('/jobs/:name/homepage', routes.jobs.homepage);
+  expressServer.delete('/jobs/:name', routes.jobs.removeJob);
 
   expressServer.put('/jobs/:name/enable', routes.setEnabledState.enableJob);
   expressServer.put('/jobs/:name/disable', routes.setEnabledState.disableJob);
