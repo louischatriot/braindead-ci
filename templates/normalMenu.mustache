@@ -1,0 +1,14 @@
+<span style="position: relative; top: -10px; opacity: 0.7;">
+<a style="color:#333; font-style: italic;" href="/settings"><i class="icon-wrench"></i> Settings</a>
+&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#333; font-style: italic;" href="/logout"><i class="icon-off"></i> Logout</a>
+</span>
+
+{{^firstTimeUse}}
+  <ul class="nav nav-tabs nav-stacked" id="sidenav">
+    {{#jobsNames}}
+    <li><a href="/jobs/{{.}}">{{.}}</a></li>
+    {{/jobsNames}}
+  </ul>
+  <br>
+  <a href="/jobs/new" class="btn">New job</a>
+{{/firstTimeUse}}

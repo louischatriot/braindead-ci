@@ -21,36 +21,13 @@
         <div class="span3">
           <h1 class="top-left-title"><a href="/">Braindead CI</a></h1>
           {{#loggedUser}}
-          <span style="position: relative; top: -10px; opacity: 0.7;">
           {{#settingsPage}}
-            <a style="color:#333; font-style: italic;" href="/"><i class="icon-home"></i> Dashboard</a>
+            {{>settingsMenu}}
           {{/settingsPage}}
 
           {{^settingsPage}}
-            <a style="color:#333; font-style: italic;" href="/settings"><i class="icon-wrench"></i> Settings</a>
+            {{>normalMenu}}
           {{/settingsPage}}
-          &nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#333; font-style: italic;" href="/logout"><i class="icon-off"></i> Logout</a>
-          </span>
-
-          {{^firstTimeUse}}
-          {{^settingsPage}}
-            <ul class="nav nav-tabs nav-stacked" id="sidenav">
-              {{#jobsNames}}
-              <li><a href="/jobs/{{.}}">{{.}}</a></li>
-              {{/jobsNames}}
-            </ul>
-            <br>
-            <a href="/jobs/new" class="btn">New job</a>
-          {{/settingsPage}}
-
-          {{#settingsPage}}
-            <ul class="nav nav-tabs nav-stacked" id="sidenav">
-              <li><a href="/settings">Third-party services</a></li>
-              <li><a href="/users">Manage users</a></li>
-            </ul>
-          {{/settingsPage}}
-          {{/firstTimeUse}}
-
           {{/loggedUser}}
 
           <hr>
