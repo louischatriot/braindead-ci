@@ -59,7 +59,7 @@ function getAllJobTypes () {
  */
 function init (callback) {
   customUtils.ensureDirectoryExists(config.workspace, function (err) {
-    if (err) { return callback("Couldn't ensure the workspace exists"); }
+    if (err) { return callback("Couldn't ensure the workspace exists: " + err.toString()); }
 
     db.initialize(function (err) {
       if (err) { return callback("Couldn't initialize the database"); }

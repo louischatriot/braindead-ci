@@ -75,7 +75,6 @@ function create (req, res, next) {
     , errors = []
     ;
 
-console.log(req.body);
   Job.createJob(req.body, function (err) {
     if (err) {
       values.validationErrors = true;
