@@ -8,6 +8,8 @@ function showAll (req, res, next) {
     , partials = { content: '{{>pages/usersShowAll}}' }
     ;
 
+  values.settingsPage = true;
+
   User.getAllUsers(function (err, users) {
     values.users = users;
 
@@ -22,6 +24,8 @@ function userCreationForm (req, res, next) {
   var values = req.renderValues || {}
     , partials = { content: '{{>pages/userCreationForm}}' }
     ;
+
+  values.settingsPage = true;
 
   return res.render('layout', { values: values
                               , partials: partials
@@ -59,6 +63,7 @@ function userEditionForm (req, res, next) {
       ;
 
     values.login = user.login;
+    values.settingsPage = true;
 
     return res.render('layout', { values: values
                                 , partials: partials

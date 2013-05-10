@@ -10,6 +10,7 @@ function displayForm (req, res, next) {
 
   db.settings.findOne({ type: 'generalSettings' }, function (err,settings) {
     values.settings = settings;
+    values.settingsPage = true;
 
     return res.render('layout', { values: values
                                 , partials: partials

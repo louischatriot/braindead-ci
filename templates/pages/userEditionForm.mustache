@@ -1,4 +1,4 @@
-<h2 class="title">Edit password for user {{login}}</h2>
+<h2 class="title">Settings for user {{login}}</h2>
 <br><br>
 
 {{#userEditSuccess}}
@@ -10,6 +10,8 @@ Password changed successfully.
 {{/userEditSuccess}}
 
 {{>validationErrors}}
+
+<legend>Change password</legend>
 
 <form class="form-horizontal" method="post" action="/users/{{login}}/edit">
   <!-- password -->
@@ -34,3 +36,7 @@ Password changed successfully.
     </div>
   </div>
 </form>
+
+
+<legend>Delete user</legend>
+
