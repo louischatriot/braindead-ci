@@ -127,17 +127,57 @@ describe('User', function () {
     var userData = { login: 'test', password: 'supersecret' };
 
     User.createUser(userData, function (err, newUser) {
+      // Bad login
       User.checkCredentials('another', 'supersecret', function (err) {
         assert.isDefined(err.validationErrors.userNotFound);
 
+        // Bad password
         User.checkCredentials('test', 'wrongpassword', function (err) {
           assert.isDefined(err.validationErrors.wrongPassword);
 
+          // Works
           User.checkCredentials('test', 'supersecret', function (err, user) {
             assert.isNull(err);
             user.login.should.equal('test');
 
             done();
+          });
+        });
+      });
+    });
+  });
+
+  it('Can change a users password if the current password is provided', function (done) {
+    var userData = { login: 'test', password: 'supersecret' };
+
+    User.createUser(userData, function (err, newUser) {
+      // Bad login
+      User.changePassword('another', 'supersecret', 'changedpassword', function (err) {
+        assert.isDefined(err);
+
+        // Bad current passworrd
+        User.changePassword('test', 'wrongone', 'changedpassword', function (err) {
+          assert.isDefined(err);
+
+          // New password doesnt validate
+          User.changePassword('test', 'supersecret', 'short', function (err) {
+            assert.isDefined(err);
+
+            // It works
+            User.changePassword('test', 'supersecret', 'changedpassword', function (err) {
+              assert.isNull(err);
+
+              User.checkCredentials('test', 'supersecret', function (err) {
+                assert.isDefined(err);
+
+                User.checkCredentials('test', 'changedpassword', function (err, user) {
+                  assert.isDefined(err);
+                  user.login.should.equal('test');
+
+                  done();
+                });
+              });
+            });
           });
         });
       });
