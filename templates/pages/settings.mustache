@@ -14,6 +14,13 @@ change them by clicking on the 'settings' link on the left.
 <br>
 {{/firstTimeUse}}
 
+{{#updateSuccessful}}
+<div class="alert alert-success">
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+Settings updated.
+</div>
+<br>
+{{/updateSuccessful}}
 
 <form class="form-horizontal" method="post" action="/settings">
   <legend>Third party services</legend>
@@ -21,7 +28,7 @@ change them by clicking on the 'settings' link on the left.
   <div class="control-group">
     <label class="control-label" for="githubToken">Token for Github<br><em style="color: #888;">(optional)</em></label>
     <div class="controls">
-      <input type="text" class="input-xlarge" id="githubToken" placeholder="Any alphanumerical string" name="githubToken" value="{{userInput.githubToken}}">
+      <input type="text" class="input-xlarge" id="githubToken" placeholder="Any alphanumerical string" name="githubToken" value="{{settings.githubToken}}">
       &nbsp;<i class="icon-question-sign" data-content="Create it if you want your jobs to automatically be built and deployed on a push to their Github repo. Then you just have to create a new service hook for the Github repo. Use WebHook URL https://ci.example.com/githubwebhook?token=your_token" data-title="Token for Github"></i>
     </div>
   </div>
@@ -30,7 +37,7 @@ change them by clicking on the 'settings' link on the left.
   <div class="control-group">
     <label class="control-label" for="hipchatToken">Hipchat API token<br><em style="color: #888;">(optional)</em></label>
     <div class="controls">
-      <input type="text" class="input-xlarge" id="hipchatToken" placeholder="e.g. 7336b9f5190d3dece963ec9528ef" name="hipchatToken" value="{{userInput.hipchatToken}}">
+      <input type="text" class="input-xlarge" id="hipchatToken" placeholder="e.g. 7336b9f5190d3dece963ec9528ef" name="hipchatToken" value="{{settings.hipchatToken}}">
       &nbsp;<i class="icon-question-sign" data-content="If you use Hipchat, enter your API token and you'll automatically be notified of all build results." data-title="Hipchat API token"></i>
     </div>
   </div>
@@ -38,7 +45,7 @@ change them by clicking on the 'settings' link on the left.
   <div class="control-group">
     <label class="control-label" for="hipchatRoom">Hipchat room<br><em style="color: #888;">(optional)</em></label>
     <div class="controls">
-      <input type="text" class="input-xlarge" id="hipchatRoom" placeholder="e.g. Deployment" name="hipchatRoom" value="{{userInput.hipchatRoom}}">
+      <input type="text" class="input-xlarge" id="hipchatRoom" placeholder="e.g. Deployment" name="hipchatRoom" value="{{settings.hipchatRoom}}">
       &nbsp;<i class="icon-question-sign" data-content="The Hipchat room you want Braindead to use to tell you the build results." data-title="Hipchat room"></i>
     </div>
   </div>

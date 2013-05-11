@@ -27,8 +27,12 @@ function update (req, res, next) {
                     };
 
   db.settings.update({ type: 'generalSettings' }, newSettings, { multi: false, upsert: true }, function (err) {
-    // No validation error possible here
-    return res.redirect(302, '/');
+    if (req.body.firstTimeUse) {
+      return res.redirect(302, '/');
+    } else {
+      req.renderValues.updateSuccessful = true;
+      return displayForm(req, res, next);
+    }
   });
 }
 
