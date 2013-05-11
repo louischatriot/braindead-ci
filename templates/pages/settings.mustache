@@ -50,6 +50,16 @@ Settings updated.
     </div>
   </div>
 
+  <!-- Braindead root url -->
+  <div class="control-group">
+    <label class="control-label" for="braindeadRootUrl">Braindead root url<br><em style="color: #888;">(optional)</em></label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" id="braindeadRootUrl" placeholder="e.g. https://ci.example.com" name="braindeadRootUrl" value="{{settings.braindeadRootUrl}}">
+      &nbsp;<i class="icon-question-sign" data-content="Braindead's root url as seen from the outside. Used to give you permalinks to build results in the Hipchat notifications." data-title="Braindead root url"></i>
+    </div>
+  </div>
+
+
   <input type="hidden" name="firstTimeUse" value="{{firstTimeUse}}">
 
   <div class="control-group">
