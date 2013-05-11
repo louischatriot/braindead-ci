@@ -31,11 +31,17 @@
 <!-- What to do if you forgot your password -->
 <br>
 <button style="font-size: 11px;" class="btn btn-link" id="forgot-password"><em>Forgot password?</em></button>
-<div id="forgot-password-explanations" style="display: none;">
+<div id="forgot-password-explanations" style="display: none;" class="alert alert-info">
 Restart Braindead with the -f option and you will be able to create a new user.
 </div>
 <script>
 $('#forgot-password').on('click', function () {
-  $('#forgot-password-explanations').css('display', 'block');
+  var $fpe = $('#forgot-password-explanations')
+
+  if ($fpe.css('display') === 'none') {
+    $fpe.css('display', 'block');
+  } else {
+    $fpe.css('display', 'none');
+  }
 });
 </script>
