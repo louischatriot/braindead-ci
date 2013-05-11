@@ -52,6 +52,10 @@ describe('Custom utils', function () {
           e1.derivedKey.length.should.equal(config.passwordEncryption.encryptedLength);
           e2.derivedKey.length.should.equal(config.passwordEncryption.encryptedLength);
 
+          // Iterations are saved
+          e1.iterations.should.equal(config.passwordEncryption.iterations);
+          e2.iterations.should.equal(config.passwordEncryption.iterations);
+
           // The two salts should be different, as well as the derived keys
           e1.salt.should.not.equal(e2.salt);
           e1.derivedKey.should.not.equal(e2.derivedKey);
@@ -81,6 +85,41 @@ describe('Custom utils', function () {
 
             customUtils.checkPassword('supersecret', e1, function (err, ok) {
               assert.isNull(err);
+              ok.should.equal(true);
+
+              done();
+            });
+          });
+        });
+      });
+    });
+
+    it('Can change the password encryption settings and still check passwords encrypted with former method', function (done) {
+      var password = 'supersecret';
+
+      customUtils.encryptPassword(password, function (err, e1) {
+        e1.salt.length.should.equal(config.passwordEncryption.saltLength);
+        e1.derivedKey.length.should.equal(config.passwordEncryption.encryptedLength);
+        e1.iterations.should.equal(config.passwordEncryption.iterations);
+
+        // Change settings (increase strength)
+        config.passwordEncryption.saltLength = 19;
+        config.passwordEncryption.encryptedLength = 34;
+        config.passwordEncryption.iterations = 20000;
+
+        // New settings are immediately applied
+        customUtils.encryptPassword(password, function (err, e2) {
+          e2.salt.length.should.equal(19);
+          e2.derivedKey.length.should.equal(34);
+          e2.iterations.should.equal(20000);
+
+          // We can still check against the password encrypted with the former method as well as the new method
+          customUtils.checkPassword(password, e1, function (err, ok) {
+            assert.isNull(err)
+            ok.should.equal(true);
+
+            customUtils.checkPassword(password, e2, function (err, ok) {
+              assert.isNull(err)
               ok.should.equal(true);
 
               done();
