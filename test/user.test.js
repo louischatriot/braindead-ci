@@ -123,6 +123,27 @@ describe('User', function () {
     });
   });
 
+  it('Can check a users credential and return him if credentials are good', function (done) {
+    var userData = { login: 'test', password: 'supersecret' };
+
+    User.createUser(userData, function (err, newUser) {
+      User.checkCredentials('another', 'supersecret', function (err) {
+        assert.isDefined(err.validationErrors.userNotFound);
+
+        User.checkCredentials('test', 'wrongpassword', function (err) {
+          assert.isDefined(err.validationErrors.wrongPassword);
+
+          User.checkCredentials('test', 'supersecret', function (err, user) {
+            assert.isNull(err);
+            user.login.should.equal('test');
+
+            done();
+          });
+        });
+      });
+    });
+  });
+
 });   // ==== End of 'User' ==== //
 
 
