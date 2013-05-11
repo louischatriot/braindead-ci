@@ -75,4 +75,55 @@ describe('User', function () {
     });
   });
 
-});
+  it('Can get a user by his login', function (done) {
+    var userData = { login: 'test', password: 'supersecret' };
+
+    User.getUser('test', function (err, user) {
+      assert.isNull(err);
+      assert.isNull(user);
+
+      User.createUser(userData, function (err, newUser) {
+
+        User.getUser('test', function (err, user) {
+          assert.isNull(err);
+          user.login.should.equal('test');
+
+          done();
+        });
+      });
+    });
+  });
+
+  it('Can remove a user from the database', function (done) {
+    var userData = { login: 'test', password: 'supersecret' };
+
+    User.createUser(userData, function (err, newUser) {
+
+      User.getUser('test', function (err, user) {
+        assert.isNull(err);
+        user.login.should.equal('test');
+
+        User.removeUser('test', function (err) {
+          assert.isNull(err);
+
+          // User has been removed
+          User.getUser('test', function (err, user) {
+            assert.isNull(err);
+            assert.isNull(user);
+
+            // Trying to remove him again will raise an error
+            User.removeUser('test', function (err) {
+              assert.isDefined(err);
+
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
+
+});   // ==== End of 'User' ==== //
+
+
+
