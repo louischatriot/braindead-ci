@@ -7,6 +7,7 @@ var should = require('chai').should()
 describe('User', function () {
 
   before(function (done) {
+    if (!db.initialize) { return done(); }   // Already initialized
     db.initialize(done);
   });
 
