@@ -29,9 +29,9 @@
     "express-group-handlers": "~0.1.1",
     "rimraf": "~2.1.4",
     "async": "~0.2.7",
-    "nedb": "0.0.5",
+    "nedb": "0.0.6",
     "underscore": "~1.4.4",
-    "connect-nedb-session": "0.0.1",
+    "connect-nedb-session": "0.0.2",
     "commander": "~1.1.1"
   },
   "devDependencies": {
