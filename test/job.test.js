@@ -10,7 +10,7 @@ var should = require('chai').should()
   ;
 
 
-describe.only('Job', function () {
+describe('Job', function () {
   var jobData;
 
   before(function (done) {
@@ -125,6 +125,40 @@ describe.only('Job', function () {
                     exists.should.equal(false);
 
                     done();
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+
+  it('Can modify a job name (other edits are straightforward)', function (done) {
+    Job.createJob({ name: 'test' }, function (err, job) {
+      assert.isNull(err);
+      assert.isDefined(job);
+      fs.exists(Job.getRootDir('test'), function (exists) {
+        exists.should.equal(true);
+        fs.exists(Job.getRootDir('another'), function (exists) {
+          exists.should.equal(false);
+
+          // Job 'test' is now 'another' and the root dir has changed name accordingly
+          // Need to get the job from the DB to retrieve the _id (createJob gives a cached copy)
+          Job.getJob('test', function (err, job) {
+            job.edit({ name: 'another' }, function (err) {
+              Job.getJob('test', function (err, job) {
+                assert.isNull(job);
+                Job.getJob('another', function (err, job) {
+                  job.name.should.equal('another');
+                  fs.exists(Job.getRootDir('test'), function (exists) {
+                    exists.should.equal(false);
+                    fs.exists(Job.getRootDir('another'), function (exists) {
+                      exists.should.equal(true);
+
+                      done();
+                    });
                   });
                 });
               });
