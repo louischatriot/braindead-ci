@@ -11,6 +11,8 @@ var should = require('chai').should()
 
 
 describe.only('Job', function () {
+  var jobData;
+
   before(function (done) {
     app.init(done);
   });
@@ -31,29 +33,30 @@ describe.only('Job', function () {
     });
   });
 
+  // Sample jobData and function to test a job corresponds to this data
+  jobData = { name: 'test'
+            , jobType: 'Basic'
+            , githubRepoUrl: 'gru'
+            , repoSSHUrl: 'rsu'
+            , branch: 'b'
+            , testScript: 'ts'
+            , deployScript: 'ds'
+            };
+
+  function testJob (job) {
+    job.name.should.equal('test');
+    job.jobType.should.equal('Basic');
+    job.githubRepoUrl.should.equal('gru');
+    job.repoSSHUrl.should.equal('rsu');
+    job.branch.should.equal('b');
+    job.testScript.should.equal('ts');
+    job.deployScript.should.equal('ds');
+    job.nextBuildNumber.should.equal(1);
+    job.enabled.should.equal(true);
+    Object.keys(job.previousBuilds).length.should.equal(0);
+  }
+
   it('Can create a job with default args, persist to the database and create root directory', function (done) {
-    var jobData = { name: 'test'
-                  , jobType: 'Basic'
-                  , githubRepoUrl: 'gru'
-                  , repoSSHUrl: 'rsu'
-                  , branch: 'b'
-                  , testScript: 'ts'
-                  , deployScript: 'ds'
-                  };
-
-    function testJob (job) {
-      job.name.should.equal('test');
-      job.jobType.should.equal('Basic');
-      job.githubRepoUrl.should.equal('gru');
-      job.repoSSHUrl.should.equal('rsu');
-      job.branch.should.equal('b');
-      job.testScript.should.equal('ts');
-      job.deployScript.should.equal('ds');
-      job.nextBuildNumber.should.equal(1);
-      job.enabled.should.equal(true);
-      Object.keys(job.previousBuilds).length.should.equal(0);
-    }
-
     db.jobs.findOne({ name: 'test' }, function (err, job) {
       assert.isNull(err);
       assert.isNull(job);
@@ -82,5 +85,21 @@ describe.only('Job', function () {
       })
     });
   });
+
+  it('Can get a job by its name', function (done) {
+    Job.createJob(jobData, function () {
+      Job.getJob('testy', function (err) {
+        assert.isDefined(err);
+
+        Job.getJob('test', function (err, job) {
+          assert.isNull(err);
+          testJob(job);
+
+          done();
+        });
+      });
+    });
+  });
+
 
 });
