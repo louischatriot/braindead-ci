@@ -91,3 +91,4 @@ if (module.parent === null) {
 
 // Interface
 module.exports.getAllJobTypes = getAllJobTypes;
+module.exports.init = init;

@@ -6,13 +6,13 @@ var should = require('chai').should()
   , rimraf = require('rimraf')
   , fs = require('fs')
   , async = require('async')
+  , app = require('../app')
   ;
 
 
 describe.only('Job', function () {
   before(function (done) {
-    if (!db.initialize) { return done(); }   // Already initialized
-    db.initialize(done);
+    app.init(done);
   });
 
   beforeEach(function (done) {
@@ -31,8 +31,56 @@ describe.only('Job', function () {
     });
   });
 
-  it('Dummy', function (done) {
-    done();
+  it('Can create a job with default args, persist to the database and create root directory', function (done) {
+    var jobData = { name: 'test'
+                  , jobType: 'Basic'
+                  , githubRepoUrl: 'gru'
+                  , repoSSHUrl: 'rsu'
+                  , branch: 'b'
+                  , testScript: 'ts'
+                  , deployScript: 'ds'
+                  };
+
+    function testJob (job) {
+      job.name.should.equal('test');
+      job.jobType.should.equal('Basic');
+      job.githubRepoUrl.should.equal('gru');
+      job.repoSSHUrl.should.equal('rsu');
+      job.branch.should.equal('b');
+      job.testScript.should.equal('ts');
+      job.deployScript.should.equal('ds');
+      job.nextBuildNumber.should.equal(1);
+      job.enabled.should.equal(true);
+      Object.keys(job.previousBuilds).length.should.equal(0);
+    }
+
+    db.jobs.findOne({ name: 'test' }, function (err, job) {
+      assert.isNull(err);
+      assert.isNull(job);
+
+      fs.exists(Job.getRootDir('test'), function (exists) {
+        exists.should.equal(false);
+
+        Job.createJob(jobData, function (err, job) {
+          assert.isNull(err);
+
+          // Returned job is the expected one
+          testJob(job);
+
+          // Root directory was created
+          fs.exists(Job.getRootDir('test'), function (exists) {
+            exists.should.equal(true);
+
+            db.jobs.findOne({ name: 'test' }, function (err, job) {
+              assert.isNull(err);
+              testJob(job);
+
+              done();
+            });
+          });
+        });
+      })
+    });
   });
 
 });
