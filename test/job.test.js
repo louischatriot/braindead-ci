@@ -102,5 +102,37 @@ describe.only('Job', function () {
     });
   });
 
+  it('Can remove a job', function (done) {
+    Job.createJob(jobData, function () {
+      Job.getJob('test', function (err, job) {
+        assert.isDefined(job);
+
+        // Can't remove it if wrong name is used
+        Job.removeJob('testy', function (err) {
+          assert.isDefined(err);
+          Job.getJob('test', function (err, job) {
+            assert.isDefined(job);
+            fs.exists(Job.getRootDir('test'), function (exists) {
+              exists.should.equal(true);
+
+              // Remove it if correct name is used
+              Job.removeJob('test', function (err) {
+                assert.isNull(err);
+                Job.getJob('test', function (err, job) {
+                  assert.isNull(err);
+                  assert.isNull(job);
+                  fs.exists(Job.getRootDir('test'), function (exists) {
+                    exists.should.equal(false);
+
+                    done();
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
 
 });
