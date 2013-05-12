@@ -1,6 +1,15 @@
-<span style="position: relative; top: -10px; opacity: 0.7;">
-<a style="color:#333; font-style: italic;" href="/settings"><i class="icon-wrench"></i> Settings</a>
-&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#333; font-style: italic;" href="/logout"><i class="icon-off"></i> Logout</a>
+<span class="menu">
+Hello, {{loggedUser.login}}
+&nbsp;&nbsp;
+
+<a href="/logout"><i class="icon-off menu-icon" data-title="test"></i></a>
+<a href="/settings"><i class="icon-wrench menu-icon"></i></a>
+
+<!--
+<span style="float: right;">
+</span>
+-->
+
 </span>
 
 {{^firstTimeUse}}
@@ -9,6 +18,10 @@
     <li><a href="/jobs/{{.}}/homepage">{{.}}</a></li>
     {{/jobsNames}}
   </ul>
-  <br>
   <a href="/jobs/new" class="btn">New job</a>
+  <br><br>
 {{/firstTimeUse}}
+
+<script>
+$('.menu-icon').tooltip();
+</script>

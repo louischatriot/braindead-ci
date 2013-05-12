@@ -1,5 +1,5 @@
 body {
-  padding-top: 25px;
+  padding-top: 5px;
 }
 
 .top-left-title a {
@@ -14,6 +14,22 @@ body {
   left: 15px;
   font-weight:300;
   margin-bottom: -10px;
+}
+
+/* Menu */
+.menu {
+  color: #666;
+  font-style: italic;
+  position: relative;
+  top: -12px;
+}
+
+.menu-icon {
+  opacity: 0.55;
+}
+
+.menu-icon:hover {
+  opacity: 1;
 }
 
 

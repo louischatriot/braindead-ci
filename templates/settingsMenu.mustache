@@ -1,6 +1,5 @@
 <span style="position: relative; top: -10px; opacity: 0.7;">
-<a style="color:#333; font-style: italic;" href="/"><i class="icon-home"></i> Dashboard</a>
-&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#333; font-style: italic;" href="/logout"><i class="icon-off"></i> Logout</a>
+Hello, {{loggedUser.login}} (<a style="color:#333; font-style: italic;" href="/logout">logout</a>)
 </span>
 
 {{^firstTimeUse}}
@@ -9,3 +8,5 @@
     <li><a href="/users">Manage users</a></li>
   </ul>
 {{/firstTimeUse}}
+
+<a style="color:#333; font-style: italic;" href="/"><i class="icon-home"></i> Dashboard</a>
