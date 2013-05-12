@@ -15,6 +15,8 @@ function newBuildWebpage (req, res, next) {
     ;
 
   Job.getJob(req.params.name, function (err, job) {
+    if (err || !job) { return res.redirect(302, '/'); }   // Shouldn't happen anyway
+
     values.job = job;
     executor.registerBuild(job.name);
 
@@ -27,6 +29,8 @@ function newBuildWebpage (req, res, next) {
 
 function buildLog (req, res, next) {
   Job.getJob(req.params.name, function (err, job) {
+    if (err || !job) { return res.redirect(302, '/'); }   // Shouldn't happen anyway
+
     job.getBuild(req.params.buildNumber, function (err, buildData) {
       if (!err) { return res.json(200, { log: buildData.log }); }
       var currentJob = executor.getCurrentJob();
@@ -51,6 +55,8 @@ function buildRecap (req, res, next) {
     ;
 
   Job.getJob(req.params.name, function (err, job) {
+    if (err || !job) { return res.redirect(302, '/'); }   // Shouldn't happen anyway
+
     values.job = job;
 
     job.getBuild(req.params.buildNumber, function (err, buildData) {

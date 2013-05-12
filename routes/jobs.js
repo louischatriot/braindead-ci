@@ -21,6 +21,8 @@ function homepage (req, res, next) {
     ;
 
   Job.getJob(req.params.name, function (err, job) {
+    if (err || !job) { return res.redirect(302, '/'); }   // Shouldn't happen anyway
+
     values.job = job;
     values.job.numberOfBuilds = job.nextBuildNumber - 1;
     values.job.previousBuilds = customUtils.objectToArrayInOrder(job.previousBuilds);
@@ -62,6 +64,8 @@ function displayForm (req, res, next) {
 
 function populateFormForEdition (req, res, next) {
   Job.getJob(req.params.name, function (err, job) {
+    if (err || !job) { return res.redirect(302, '/'); }   // Shouldn't happen anyway
+
     req.renderValues.userInput = job;
     req.renderValues.currentName = job.name;
     req.renderValues.editMode = true;
@@ -98,6 +102,8 @@ function edit (req, res, next) {
   values.currentName = currentName;
 
   Job.getJob(currentName, function (err, job) {
+    if (err || !job) { return res.redirect(302, '/'); }   // Shouldn't happen anyway
+
     job.edit(req.body, function (err) {
       if (err) {
         if (err.validationErrors) {

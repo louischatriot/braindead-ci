@@ -88,8 +88,9 @@ describe.only('Job', function () {
 
   it('Can get a job by its name', function (done) {
     Job.createJob(jobData, function () {
-      Job.getJob('testy', function (err) {
-        assert.isDefined(err);
+      Job.getJob('testy', function (err, job) {
+        assert.isNull(err);
+        assert.isNull(job);
 
         Job.getJob('test', function (err, job) {
           assert.isNull(err);
