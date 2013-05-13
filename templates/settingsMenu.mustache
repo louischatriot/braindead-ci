@@ -1,6 +1,9 @@
-<span style="position: relative; top: -10px; opacity: 0.7;">
-Hello, {{loggedUser.login}} (<a style="color:#333; font-style: italic;" href="/logout">logout</a>)
-</span>
+<div class="menu">
+  <span class="menu-greeting">Hello, {{loggedUser.login}}</span>
+
+  <a href="/logout"><i class="icon-off menu-icon" data-title="Logout"></i></a>
+  <a href="/"><i class="icon-home menu-icon" data-title="Dashboard" style="position: relative; left: -5px;"></i></a>
+</div>
 
 {{^firstTimeUse}}
   <ul class="nav nav-tabs nav-stacked" id="sidenav">
@@ -9,4 +12,9 @@ Hello, {{loggedUser.login}} (<a style="color:#333; font-style: italic;" href="/l
   </ul>
 {{/firstTimeUse}}
 
-<a style="color:#333; font-style: italic;" href="/"><i class="icon-home"></i> Dashboard</a>
+
+<script>
+$('.menu-icon').tooltip({ animation: false
+                        , placement: 'bottom'
+                        });
+</script>

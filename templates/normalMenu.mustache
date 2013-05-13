@@ -1,16 +1,10 @@
-<span class="menu">
-Hello, {{loggedUser.login}}
-&nbsp;&nbsp;
+<div class="menu">
+  <span class="menu-greeting">Hello, {{loggedUser.login}}</span>
 
-<a href="/logout"><i class="icon-off menu-icon" data-title="test"></i></a>
-<a href="/settings"><i class="icon-wrench menu-icon"></i></a>
+  <a href="/logout"><i class="icon-off menu-icon" data-title="Logout"></i></a>
+  <a href="/settings"><i class="icon-wrench menu-icon" data-title="Settings" style="position: relative; left: -5px;"></i></a>
+</div>
 
-<!--
-<span style="float: right;">
-</span>
--->
-
-</span>
 
 {{^firstTimeUse}}
   <ul class="nav nav-tabs nav-stacked" id="sidenav">
@@ -23,5 +17,7 @@ Hello, {{loggedUser.login}}
 {{/firstTimeUse}}
 
 <script>
-$('.menu-icon').tooltip();
+$('.menu-icon').tooltip({ animation: false
+                        , placement: 'bottom'
+                        });
 </script>

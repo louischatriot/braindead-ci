@@ -18,10 +18,13 @@ body {
 
 /* Menu */
 .menu {
-  color: #666;
-  font-style: italic;
   position: relative;
   top: -12px;
+}
+
+.menu-greeting {
+  color: #666;
+  font-style: italic;
 }
 
 .menu-icon {
@@ -31,7 +34,6 @@ body {
 
 .menu-icon:hover {
   opacity: 1;
-  float: right;
 }
 
 
