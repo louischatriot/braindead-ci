@@ -5,10 +5,10 @@ Braindead CI
 server written in Node.js**. It can build and deploy your code
 automatically upon a push on Github, advertise builds on Hipchat and do that quickly and painlessly.
 
-## Screenshots
+## What does it look like?
 <img src="http://i.imgur.com/Ojq7w9Y.png" alt="Dashboard">
 
-## Features
+## What can it do?
 * Automatic build and deploy on a push to the Github repository
 * Advertise build results on Hipchat
 * Very fast (starts up in less than a second, page load typically less than 500ms)
@@ -42,6 +42,12 @@ make test
 It's **highly** recommended to serve Braindead over HTTPS (with Nginx for example). Upon first launch you will create your first admin user (you can create others in the settings), and then you'll need to be logged in to do anything.
 
 The path to Braindead's home page should be `/` (corresponding to a URL such as `https://ci.example.com/` or `https://example.com:2008/`). I will add an option for other URL structures in the future if enough people ask for it though.
+
+
+## Hooking up Braindead and Github
+Braindead provides a URL, `/githubwebhook`, that Github can use POST to everytime a push occurs on the repo. In order to only allow Github to trigger builds on Braindead, you need to first create a Token for Github in Braindead's Third-party services settings:
+<img src="http://i.imgur.com/iwXWwII.png" alt="Github token">
+
 
 
 ## Going forward
