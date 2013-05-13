@@ -54,8 +54,15 @@ The path to Braindead's home page should be `/` (corresponding to a URL such as 
 <img src="http://i.imgur.com/FcVbiTw.png" alt="Github webhook">
 
 
+
+## Hooking up Braindead and Hipchat
+In the third-party services settings, enter your Hipchat API token and the name of the room you want Braindead to tell you build results. You can also specify the "Braindead root url" which is the url of the home page (e.g. https://ci.example.com), so that the messages in Hipchat contain links to the build results.
+
+Once set, you will be notified whenever a job was built (or skipped if disabled), and Hipchat will alert you in case the build fails.
+
+
 ## Going forward
-We've been using Braindead CI for a few months at <a href="http://tldr.io" target="_blank">tldr.io</a> and it works very well (for our needs at least). That said, this is just the first release to the outside so some bolts may need tightening. Don't hesitate to submit issues or pull requests!
+We've been using Braindead CI for a few months at <a href="http://tldr.io" target="_blank">tldr.io</a> and it works very well (for our needs at least). That said, this is just the first release to the outside so some bolts may need tightening. Also, we will certainly need to expand the "smart builds" behavior for Node.js projects to other platforms, and enable build advertising on other channels than Hipchat. Don't hesitate to submit issues or pull requests!
 
 
 ## License
