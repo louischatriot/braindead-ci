@@ -38,6 +38,12 @@ make test
 ```
 
 
+## In production
+It's **highly** recommended to serve Braindead over HTTPS (with Nginx for example). Upon first launch you will create your first admin user (you can create others in the settings), and then you'll need to be logged in to do anything.
+
+The path to Braindead's home page should be `/` (corresponding to a URL such as `https://ci.example.com/` or `https://example.com:2008/`). I will add an option for other URL structures in the future if enough people ask for it though.
+
+
 ## Going forward
 We've been using Braindead CI for a few months at <a href="http://tldr.io" target="_blank">tldr.io</a> and it works very well (for our needs at least). That said, this is just the first release to the outside so some bolts may need tightening. Don't hesitate to submit issues or pull requests!
 
