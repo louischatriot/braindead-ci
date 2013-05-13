@@ -5,6 +5,8 @@ Braindead CI is a self-hosted continuous integration and deployment
 server written in Node.js. It can build and deploy your code
 automatically upon a push on Github
 
+## Screenshots
+
 
 ## Features
 * Automatic build and deploy on a push to the Github repository
@@ -15,7 +17,7 @@ automatically upon a push on Github
   is
 * Smart support for Node.js projects (only reinstall dependencies if
   needed to gain time). Smart support for other platforms will come
-depending on use
+depending on use (if you need it for your stack, do submit an issue, or even better a PR!)
 
 
 ## Installation and tests
@@ -34,6 +36,10 @@ make test
 // Check out possible command-line options
 ./braindead.js -h
 ```
+
+
+## Going forward
+We've been using Braindead CI for a few months at <a href="http://tldr.io" target="_blank">tldr.io</a> and it works very well (for our needs at least). That said, this is just the first release to the outside so some bolts may need tightening. Don't hesitate to submit issues or pull requests!
 
 
 ## License
