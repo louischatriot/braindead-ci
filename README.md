@@ -45,9 +45,13 @@ The path to Braindead's home page should be `/` (corresponding to a URL such as 
 
 
 ## Hooking up Braindead and Github
-Braindead provides a URL, `/githubwebhook`, that Github can use POST to everytime a push occurs on the repo. In order to only allow Github to trigger builds on Braindead, you need to first create a Token for Github in Braindead's Third-party services settings:
+**1.** Braindead provides a URL, `/githubwebhook`, that Github can use POST to everytime a push occurs on the repo. In order to only allow Github to trigger builds on Braindead, you need to first create a token for Github in Braindead's Third-party services settings:
+
 <img src="http://i.imgur.com/iwXWwII.png" alt="Github token">
 
+**2.** Then, you set up a WebHook on your Github repo ("Settings", "Service hooks"), using the `/githubwebhook` URL and the same token you defined in step 1 as the "token" querystring parameter like this:
+
+<img src="http://i.imgur.com/FcVbiTw.png" alt="Github webhook">
 
 
 ## Going forward
