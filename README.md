@@ -21,6 +21,8 @@ depending on use (if you need it for your stack, do submit an issue, or even bet
 
 
 ## Installation and tests
+This assume you already have <a href="http://nodejs.org/" target="_blank">Node.js</a> installed on your system.
+
 ```javascript
 // Install Braindead in two commands
 git clone git@github.com:louischatriot/braindead-ci.git
