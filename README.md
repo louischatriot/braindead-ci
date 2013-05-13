@@ -68,5 +68,5 @@ We've been using Braindead CI for a few months at <a href="http://tldr.io" targe
 
 
 ## License
-MIT. Do whatever you want with the code.
+MIT. Do whatever you want with the code.  
 (c) 2013 Louis Chatriot, louis@tldr.io
