@@ -26,10 +26,12 @@ body {
 
 .menu-icon {
   opacity: 0.55;
+  float: right;
 }
 
 .menu-icon:hover {
   opacity: 1;
+  float: right;
 }
 
 
