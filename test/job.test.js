@@ -6,7 +6,7 @@ var should = require('chai').should()
   , rimraf = require('rimraf')
   , fs = require('fs')
   , async = require('async')
-  , app = require('../app')
+  , app = require('../braindead')
   ;
 
 

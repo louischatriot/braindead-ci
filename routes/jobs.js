@@ -8,7 +8,7 @@ var config = require('../lib/config')
   , validation = require('../lib/validation')
   , customUtils = require('../lib/customUtils')
   , moment = require('moment')
-  , app = require('../app')
+  , app = require('../braindead')
   , _ = require('underscore')
   ;
 
