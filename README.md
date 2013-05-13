@@ -27,10 +27,11 @@ npm install
 make test
 
 // You're done, now to launch it:
-node app.js -p 2009   // Launch Braindead on port 2009
+./braindead              // Launch Braindead on default port (2008)
+./braindead.js -p 2009   // Launch Braindead on port 2009
 
 // Check out possible command-line options
-node app.js -h
+./braindead.js -h
 ```
 
 
