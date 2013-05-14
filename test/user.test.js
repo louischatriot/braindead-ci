@@ -65,7 +65,7 @@ describe('User', function () {
 
       userData.password = 'supersecret';
       User.createUser(userData, function (err) {
-        if (err) { return done(err); }
+        if (err) { return done(err.toString()); }
 
         User.createUser(userData, function (err) {
           assert.isDefined(err.validationErrors.login);
@@ -80,13 +80,13 @@ describe('User', function () {
     var userData = { login: 'test', password: 'supersecret' };
 
     User.getUser('test', function (err, user) {
-      if (err) { return done(err); }
+      if (err) { return done(err.toString()); }
       assert.isNull(user);
 
       User.createUser(userData, function (err, newUser) {
 
         User.getUser('test', function (err, user) {
-          if (err) { return done(err); }
+          if (err) { return done(err.toString()); }
           user.login.should.equal('test');
 
           done();
@@ -101,15 +101,15 @@ describe('User', function () {
     User.createUser(userData, function (err, newUser) {
 
       User.getUser('test', function (err, user) {
-        if (err) { return done(err); }
+        if (err) { return done(err.toString()); }
         user.login.should.equal('test');
 
         User.removeUser('test', function (err) {
-          if (err) { return done(err); }
+          if (err) { return done(err.toString()); }
 
           // User has been removed
           User.getUser('test', function (err, user) {
-            if (err) { return done(err); }
+            if (err) { return done(err.toString()); }
             assert.isNull(user);
 
             // Trying to remove him again will raise an error
@@ -138,7 +138,7 @@ describe('User', function () {
 
           // Works
           User.checkCredentials('test', 'supersecret', function (err, user) {
-            if (err) { return done(err); }
+            if (err) { return done(err.toString()); }
             user.login.should.equal('test');
 
             done();
@@ -166,7 +166,7 @@ describe('User', function () {
 
             // It works
             User.changePassword('test', 'supersecret', 'changedpassword', function (err) {
-              if (err) { return done(err); }
+              if (err) { return done(err.toString()); }
 
               User.checkCredentials('test', 'supersecret', function (err) {
                 assert.isDefined(err);
