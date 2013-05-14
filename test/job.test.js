@@ -58,14 +58,14 @@ describe('Job', function () {
 
   it('Can create a job with default args, persist to the database and create root directory', function (done) {
     db.jobs.findOne({ name: 'test' }, function (err, job) {
-      assert.isNull(err);
+      if (err) { return done(err); }
       assert.isNull(job);
 
       fs.exists(Job.getRootDir('test'), function (exists) {
         exists.should.equal(false);
 
         Job.createJob(jobData, function (err, job) {
-          assert.isNull(err);
+          if (err) { return done(err); }
 
           // Returned job is the expected one
           testJob(job);
@@ -75,7 +75,7 @@ describe('Job', function () {
             exists.should.equal(true);
 
             db.jobs.findOne({ name: 'test' }, function (err, job) {
-              assert.isNull(err);
+              if (err) { return done(err); }
               testJob(job);
 
               done();
@@ -89,11 +89,11 @@ describe('Job', function () {
   it('Can get a job by its name', function (done) {
     Job.createJob(jobData, function () {
       Job.getJob('testy', function (err, job) {
-        assert.isNull(err);
+        if (err) { return done(err); }
         assert.isNull(job);
 
         Job.getJob('test', function (err, job) {
-          assert.isNull(err);
+          if (err) { return done(err); }
           testJob(job);
 
           done();
@@ -117,9 +117,9 @@ describe('Job', function () {
 
               // Remove it if correct name is used
               Job.removeJob('test', function (err) {
-                assert.isNull(err);
+                if (err) { return done(err); }
                 Job.getJob('test', function (err, job) {
-                  assert.isNull(err);
+                  if (err) { return done(err); }
                   assert.isNull(job);
                   fs.exists(Job.getRootDir('test'), function (exists) {
                     exists.should.equal(false);
@@ -137,7 +137,7 @@ describe('Job', function () {
 
   it('Can modify a job name (other edits are straightforward)', function (done) {
     Job.createJob({ name: 'test' }, function (err, job) {
-      assert.isNull(err);
+      if (err) { return done(err); }
       assert.isDefined(job);
       fs.exists(Job.getRootDir('test'), function (exists) {
         exists.should.equal(true);

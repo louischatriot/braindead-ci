@@ -40,9 +40,9 @@ describe('Custom utils', function () {
 
       // Generate two encrypted passwords from the same password
       customUtils.encryptPassword(password, function (err, e1) {
-        assert.isNull(err);
+        if (err) { return done(err); }
         customUtils.encryptPassword(password, function (err, e2) {
-          assert.isNull(err);
+          if (err) { return done(err); }
 
           // Salt length as defined in config
           e1.salt.length.should.equal(config.passwordEncryption.saltLength);
@@ -73,18 +73,18 @@ describe('Custom utils', function () {
       var password = 'supersecret';
 
       customUtils.encryptPassword(password, function (err, e1) {
-        assert.isNull(err);
+        if (err) { return done(err); }
 
         customUtils.checkPassword('supersecre', e1, function (err, ok) {
-          assert.isNull(err);
+          if (err) { return done(err); }
           ok.should.equal(false);
 
           customUtils.checkPassword('supersecrett', e1, function (err, ok) {
-            assert.isNull(err);
+            if (err) { return done(err); }
             ok.should.equal(false);
 
             customUtils.checkPassword('supersecret', e1, function (err, ok) {
-              assert.isNull(err);
+              if (err) { return done(err); }
               ok.should.equal(true);
 
               done();
@@ -115,11 +115,11 @@ describe('Custom utils', function () {
 
           // We can still check against the password encrypted with the former method as well as the new method
           customUtils.checkPassword(password, e1, function (err, ok) {
-            assert.isNull(err)
+            if (err) { return done(err); }
             ok.should.equal(true);
 
             customUtils.checkPassword(password, e2, function (err, ok) {
-              assert.isNull(err)
+              if (err) { return done(err); }
               ok.should.equal(true);
 
               done();
