@@ -40,8 +40,7 @@ describe('User', function () {
 
       User.createUser(userData, function (err, newUser) {
         newUser.login.should.equal('test');
-        assert.isDefined(newUser.password.salt);
-        newUser.password.derivedKey.should.not.equal('supersecret');
+        newUser.password.should.not.equal('supersecret');
 
         done();
       });
