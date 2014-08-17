@@ -1,6 +1,8 @@
 Braindead CI
 ============
 
+**IMPORTANT: this software is not maintained anymore, please don't submit anymore pull requests except for bugfixes**
+
 **Braindead CI is a self-hosted continuous integration and deployment
 server written in Node.js**. It can build and deploy your code
 automatically upon a push on Github, advertise builds on Hipchat and do that quickly and painlessly.
