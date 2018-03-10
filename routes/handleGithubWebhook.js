@@ -13,14 +13,15 @@ var Job = require('../lib/job')
 
 module.exports = function (req, res, next) {
   db.settings.findOne({ type: 'generalSettings' }, function (err, settings) {
-    if (req.query.token === undefined || req.query.token.length === 0 || req.query.token !== settings.githubToken) { return res.send(200); } 
+    if (req.query.token === undefined || req.query.token.length === 0 || req.query.token !== settings.githubToken) { return res.send(200); }
 
     db.jobs.find({}, function (err, jobs) {
       var receivedGithubRepoUrl = req.body.repository.html_url;
+      var receivedBranch = req.body.ref.replace(/^refs\/heads\//, '')
 
       // Build all the enabled jobs corresponding to this repo (all jobs for all branches)
       jobs.forEach(function (job) {
-        if (job.githubRepoUrl === receivedGithubRepoUrl) {
+        if (job.githubRepoUrl === receivedGithubRepoUrl && job.branch === receivedBranch) {
           if (job.enabled) {
             executor.registerBuild(job.name);
           } else {
